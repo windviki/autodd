@@ -57,7 +57,8 @@ do
 		echo "[INFO] VPN is UP, trying to modify the routing table" | tee -a $VPNLOG
 		cd /tmp; 
 		rm -f $VPNUP
-		( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) | tee -a $VPNLOG
+		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) | tee -a $VPNLOG
+		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) | tee -a $VPNLOG
 		rt=$?
 		echo "[DEBUG] return $rt" | tee -a $VPNLOG
 		if [ $rt -eq 0 ]; then 
