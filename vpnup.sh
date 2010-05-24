@@ -1,10 +1,7 @@
 #!/bin/sh
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
-#OLDGW=`ip route show | grep '^default' | sed -e 's/default via \([^ ]*\).*/\1/'`
-#OLDGW=`route  | grep ^default | awk '{print $2}'`
 OLDGW=$(nvram get wan_gateway)
-#PPTPSRV="74.82.172.146"
 PPTPSRV=$(nvram get pptpd_client_srvip)
 PPTPGW=$(nvram get pptp_gw)
 
@@ -12,10 +9,6 @@ if [ $OLDGW == '' ]; then
 	echo "[ERR] OLDGW is empty, is the WAN disconnected?"
 	exit 0
 fi
-
-#if [ ! -e /tmp/pptpvpn_oldgw ]; then
-#    echo $OLDGW > /tmp/pptpvpn_oldgw
-#fi
 
 route add -host $PPTPSRV gw $OLDGW
 echo "[INFO] delete default gw $OLDGW" 

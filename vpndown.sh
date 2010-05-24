@@ -1,8 +1,6 @@
 #!/bin/sh
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
-#OLDGW=`cat /tmp/pptpvpn_oldgw`
-#PPTPSRV="74.82.172.146"
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
 
@@ -966,4 +964,3 @@ route del -host $PPTPSRV
 route del default gw $PPTPGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
-#rm /tmp/pptpvpn_oldgw
