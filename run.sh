@@ -12,7 +12,7 @@ fi
 VPNUP='vpnup.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
-DLDIR='http://autoddvpn.googlecode.com/files/'
+DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
 
 #
 # By running this script, we'll assign the following variables into nvram 
