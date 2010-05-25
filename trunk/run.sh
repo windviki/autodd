@@ -46,7 +46,7 @@ do
 				nvram set pptp_gw="$PPTPGW"
 				break
 			else
-				echo "[DEBUG] failed to get PPTPGW, retry now" | tee -a $VPNLOG
+				echo "[DEBUG] failed to get PPTPGW, retry in 3 seconds" | tee -a $VPNLOG
 				sleep 3
 				continue
 				# let it fall into endless loop if we still can't find the PPTP gw
@@ -62,8 +62,6 @@ do
 		rt=$?
 		echo "[DEBUG] return $rt" | tee -a $VPNLOG
 		if [ $rt -eq 0 ]; then 
-			#echo "[INFO] fix dnsmasq from DNS hijacking"  | tee -a $VPNLOG
-			#( /usr/bin/wget http://pahud.net/@ddwrt/dnsmasq-fix.sh -O - | /bin/sh 2>&1 ) | tee -a $VPNLOG
 			echo "[DEBUG] break" | tee -a $VPNLOG
 			break; 
 		fi
