@@ -67,7 +67,7 @@ do
 			#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) | tee -a $VPNLOG
 			( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) | tee -a $VPNLOG
 		else
-			/bin/sh $VPNUP 2>&1 | tee -a $VPNLOG
+			/bin/sh $(dirname $0)/$VPNUP 2>&1 | tee -a $VPNLOG
 		fi
 		rt=$?
 		echo "[DEBUG] return $rt" | tee -a $VPNLOG
