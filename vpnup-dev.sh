@@ -4,6 +4,7 @@ export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
 PPTPGW=$(nvram get pptp_gw)
+PID=$$
 INFO="[INFO#${PID}]"
 DEBUG="[DEBUG#${PID}]"
 ERROR="[ERROR#${PID}]"
