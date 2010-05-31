@@ -16,7 +16,7 @@ if [ $OLDGW == '' ]; then
 fi
 
 route add -host $PPTPSRV gw $OLDGW
-echo "[INFO] delete default gw $OLDGW" 
+echo "$INFO delete default gw $OLDGW" 
 route del default gw $OLDGW
 
 echo "$INFO add default gw $PPTPGW" 
