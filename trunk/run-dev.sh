@@ -14,6 +14,8 @@ VPNUP='vpnup-dev.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
+PID=$$
+INFO="[INFO#${PID}]"
 
 #
 # By running this script, we'll assign the following variables into nvram 
@@ -30,7 +32,7 @@ do
 		# pptp is up
 		PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
 		if [ $PPTPDEV != '' ]; then
-			echo "[INFO] got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
+			echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
 			echo "[DEBUG] failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
@@ -43,7 +45,7 @@ do
 		do
 			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+) " | cut -d: -f2)
 			if [ $PPTPGW != '' ]; then
-				echo "[INFO] got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
+				echo "$INFO got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
 				nvram set pptp_gw="$PPTPGW"
 				break
 			else
@@ -55,7 +57,7 @@ do
 		done
 		
 		# now we hve the PPTPGW, let's modify the routing table
-		echo "[INFO] VPN is UP, trying to modify the routing table" >> $VPNLOG
+		echo "$INFO VPN is UP, trying to modify the routing table" >> $VPNLOG
 		cd /tmp; 
 		rm -f $VPNUP
 		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
@@ -67,7 +69,7 @@ do
 			break; 
 		fi
 	else
-		echo "[INFO] VPN is down, please bring up the PPTP VPN first." >> $VPNLOG
+		echo "$INFO VPN is down, please bring up the PPTP VPN first." >> $VPNLOG
 		sleep 10
 	fi
 done
