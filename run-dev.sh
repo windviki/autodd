@@ -2,12 +2,13 @@
 
 # file lock to avoid other rc_firewall running at the same time
 LOCK='/tmp/rc_fw_done'
-if [ -e $LOCK ]; then
-	echo "[DEBUG] other rc_firewall may already be running, quit" >> $VPNLOG
-	exit 1
-else
-	touch $LOCK
-fi
+
+#if [ -e $LOCK ]; then
+#	echo "[DEBUG] other rc_firewall may already be running, quit" >> $VPNLOG
+#	exit 1
+#else
+#	touch $LOCK
+#fi
 
 VPNUP='vpnup-dev.sh'
 VPNLOG='/tmp/autoddvpn.log'
