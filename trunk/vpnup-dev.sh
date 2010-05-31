@@ -4,9 +4,13 @@ export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
 PPTPGW=$(nvram get pptp_gw)
+INFO="[INFO#${PID}]"
+DEBUG="[DEBUG#${PID}]"
+ERROR="[ERROR#${PID}]"
+
 
 if [ $OLDGW == '' ]; then
-	echo "[ERR] OLDGW is empty, is the WAN disconnected?"
+	echo "$ERROR OLDGW is empty, is the WAN disconnected?"
 	exit 0
 fi
 
@@ -14,10 +18,10 @@ route add -host $PPTPSRV gw $OLDGW
 #echo "[INFO] delete default gw $OLDGW" 
 #route del default gw $OLDGW
 
-echo "[INFO] add default gw $PPTPGW" 
+echo "$INFO add default gw $PPTPGW" 
 route add default gw $PPTPGW
 
-echo "[INFO] adding the static routes, this may teke a while."
+echo "$INFO adding the static routes, this may teke a while."
 route add -net 1.12.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 1.24.0.0 netmask 255.248.0.0 gw $OLDGW
 route add -net 110.6.0.0 netmask 255.254.0.0 gw $OLDGW
@@ -974,16 +978,16 @@ route add -net 61.236.0.0 netmask 255.254.0.0 gw $OLDGW
 route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
 
 # final check again
-echo "[INFO] final check the default gw"
+echo "$INFO final check the default gw"
 while true
 do
 	GW=$(route | grep ^default | awk '{print $2}')
-	echo "[DEBUG] my current gw is $GW"
+	echo "$DEBUG my current gw is $GW"
 	if [ "$GW" == "$OLDGW" ]; then 
-		echo "[DEBUG] still got the OLDGW, why?"
-		echo "[INFO] delete default gw $OLDGW" 
+		echo "$DEBUG still got the OLDGW, why?"
+		echo "$INFO delete default gw $OLDGW" 
 		route del default gw $OLDGW
-		echo "[INFO] add default gw $PPTPGW again" 
+		echo "$INFO add default gw $PPTPGW again" 
 		route add default gw $PPTPGW
 		sleep 3
 	else
@@ -991,4 +995,4 @@ do
 	fi
 done
 
-echo "[INFO] static routes added"
+echo "$INFO static routes added"

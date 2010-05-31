@@ -16,6 +16,7 @@ PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
 PID=$$
 INFO="[INFO#${PID}]"
+DEBUG="[DEBUG#${PID}]"
 
 #
 # By running this script, we'll assign the following variables into nvram 
@@ -35,7 +36,7 @@ do
 			echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
-			echo "[DEBUG] failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
+			echo "$DEBUG failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
 			sleep 3
 			continue
 		fi
@@ -49,7 +50,7 @@ do
 				nvram set pptp_gw="$PPTPGW"
 				break
 			else
-				echo "[DEBUG] failed to get PPTPGW, retry in 3 seconds" >> $VPNLOG
+				echo "$DEBUG failed to get PPTPGW, retry in 3 seconds" >> $VPNLOG
 				sleep 3
 				continue
 				# let it fall into endless loop if we still can't find the PPTP gw
@@ -63,9 +64,9 @@ do
 		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
 		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
 		rt=$?
-		echo "[DEBUG] return $rt" >> $VPNLOG
+		echo "$DEBUG return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
-			echo "[DEBUG] break" >> $VPNLOG
+			echo "$DEBUG break" >> $VPNLOG
 			break; 
 		fi
 	else
