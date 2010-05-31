@@ -9,7 +9,7 @@ else
 	touch $LOCK
 fi
 
-VPNUP='vpnup.sh'
+VPNUP='vpnup-dev.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
