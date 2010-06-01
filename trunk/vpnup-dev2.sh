@@ -13,6 +13,8 @@ ERROR="[ERROR#${PID}]"
 if [ $OLDGW == '' ]; then
 	echo "$ERROR OLDGW is empty, is the WAN disconnected?"
 	exit 0
+else
+	echo "$INFO OLDGW is $OLDGW"
 fi
 
 route add -host $PPTPSRV gw $OLDGW
