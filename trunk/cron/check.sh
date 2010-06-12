@@ -28,7 +28,7 @@ DEBUG="[DEBUG#${PID}]"
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
 
 #while true
-for i in 1 2 3
+for i in 1 2 3 4 5
 do
 	if [ $PPTPSRVSUB != '' ]; then
 		# pptp is up
@@ -43,9 +43,10 @@ do
 		fi
 
 		# find the PPTP gw
-		while true
+		#while true
+		for i in 1 2 3
 		do
-			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+) " | cut -d: -f2)
+			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 			if [ $PPTPGW != '' ]; then
 				echo "$INFO got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
 				nvram set pptp_gw="$PPTPGW"
@@ -59,10 +60,10 @@ do
 		done
 		
 		# PPTPGW is good, let's check the default GW
-		GW=$(route | grep ^def | awk '{print $2}')
+		GW=$(route | grep ^def | head -n1 | awk '{print $2}' )
 
 		echo "$DEBUG my current gw is $GW"
-		if [ "$GW" != "$(nvram get pptp_gw)" ]; then
+		if [ "${GW}X" != "$(nvram get pptp_gw)X" ]; then
 			echo "current default GW is not $(nvram get pptp_gw)"
 			echo "rebuild the routing tables now"
 			cd /tmp; 
@@ -72,6 +73,7 @@ do
 			#( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
 		else
 			echo "everything is GOOD, let's go back to sleep"
+			break
 		fi
 		
 		# now we hve the PPTPGW, let's modify the routing table
