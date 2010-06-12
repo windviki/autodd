@@ -26,7 +26,7 @@ DEBUG="[DEBUG#${PID}]"
 #
 
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
-
+date
 #while true
 for i in 1 2 3 4 5
 do
