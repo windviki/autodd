@@ -39,7 +39,7 @@ do
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S %z") got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
-			echo "$DEBUG failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S %z") failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
 			sleep 3
 			continue
 		fi
