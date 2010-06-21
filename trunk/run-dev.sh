@@ -73,9 +73,10 @@ do
 			echo "$INFO preparing the self-fix script" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
 			echo "$INFO preparing the cron_job" >> $VPNLOG
-			#mkdir /tmp/cron.d/
+			mkdir /tmp/cron.d/
 			#echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
 			nvram set cron_jobs="${CRONJOBS}"
+			nvram get cron_jobs > /tmp/cron.d/cron_jobs
 			nvram set cron_enable=1
 			echo "$DEBUG break" >> $VPNLOG
 			break; 
