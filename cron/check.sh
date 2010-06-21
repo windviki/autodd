@@ -34,10 +34,11 @@ do
 		# pptp is up
 		PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
 		if [ $PPTPDEV != '' ]; then
-			echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
+			#echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
+			echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram"
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
-			echo "$DEBUG failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
+			echo "$DEBUG failed to get PPTPDEV, retry in 3 seconds"
 			sleep 3
 			continue
 		fi
@@ -48,11 +49,11 @@ do
 		do
 			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 			if [ $PPTPGW != '' ]; then
-				echo "$INFO got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
+				echo "$INFO got PPTPGW as $PPTPGW, set into nvram"
 				nvram set pptp_gw="$PPTPGW"
 				break
 			else
-				echo "$DEBUG failed to get PPTPGW, retry in 3 seconds" >> $VPNLOG
+				echo "$DEBUG failed to get PPTPGW, retry in 3 seconds"
 				sleep 3
 				continue
 				# let it fall into endless loop if we still can't find the PPTP gw
@@ -89,7 +90,7 @@ do
 		#	break; 
 		#fi
 	else
-		echo "$INFO VPN is down, please bring up the PPTP VPN first." >> $VPNLOG
+		echo "$INFO VPN is down, please bring up the PPTP VPN first."
 		sleep 3
 	fi
 done
