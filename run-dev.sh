@@ -29,6 +29,7 @@ DEBUG="[DEBUG#${PID}]"
 
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
 
+echo "$INFO log starts" >> $VPNLOG
 while true
 do
 	if [ $PPTPSRVSUB != '' ]; then
