@@ -14,9 +14,11 @@ VPNUP='vpnup-dev.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
+CRONJOBS="* * * * * root /bin/sh /tmp/check.sh >> /tmp/last_check.log"
 PID=$$
 INFO="[INFO#${PID}]"
 DEBUG="[DEBUG#${PID}]"
+
 
 #
 # By running this script, we'll assign the following variables into nvram 
@@ -44,7 +46,7 @@ do
 		# find the PPTP gw
 		while true
 		do
-			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+) " | cut -d: -f2)
+			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 			if [ $PPTPGW != '' ]; then
 				echo "$INFO got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
 				nvram set pptp_gw="$PPTPGW"
@@ -69,6 +71,12 @@ do
 			echo "$DEBUG break" >> $VPNLOG
 			break; 
 		fi
+		# prepare the self-fix script
+		/usr/bin/wget "${DLDIR}/cron/check.sh"
+		mkdir /tmp/cron.d/
+		echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
+		nvram set cron_jobs="${CRONJOBS}"
+		nvram set cron_enable=1
 	else
 		echo "$INFO VPN is down, please bring up the PPTP VPN first." >> $VPNLOG
 		sleep 10
