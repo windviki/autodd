@@ -77,7 +77,7 @@ do
 			echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
 			nvram set cron_jobs="${CRONJOBS}"
 			nvram set cron_enable=1
-			/usr/sbin/cron
+			#/usr/sbin/cron
 			echo "$DEBUG break" >> $VPNLOG
 			break; 
 		fi
