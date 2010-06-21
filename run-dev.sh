@@ -29,14 +29,14 @@ DEBUG="[DEBUG#${PID}]"
 
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
 
-echo "$INFO log starts" >> $VPNLOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S %z") log starts" >> $VPNLOG
 while true
 do
 	if [ $PPTPSRVSUB != '' ]; then
 		# pptp is up
 		PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
 		if [ $PPTPDEV != '' ]; then
-			echo "$INFO got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S %z") got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
 			echo "$DEBUG failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
