@@ -78,6 +78,8 @@ do
 			nvram set cron_jobs="${CRONJOBS}"
 			nvram get cron_jobs > /tmp/cron.d/cron_jobs
 			nvram set cron_enable=1
+			pidof cron || \
+			echo "$INFO cron not running, starting the cron ..." && cron
 			echo "$DEBUG break" >> $VPNLOG
 			break; 
 		fi
