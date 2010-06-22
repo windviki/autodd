@@ -2,17 +2,23 @@
 
 # file lock to avoid other rc_firewall running at the same time
 LOCK='/tmp/rc_fw_done'
-if [ -e $LOCK ]; then
-	echo "[DEBUG] other rc_firewall may already be running, quit" | tee -a $VPNLOG
-	exit 1
-else
-	touch $LOCK
-fi
+
+#if [ -e $LOCK ]; then
+#	echo "[DEBUG] other rc_firewall may already be running, quit" >> $VPNLOG
+#	exit 1
+#else
+#	touch $LOCK
+#fi
 
 VPNUP='vpnup.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
+CRONJOBS="* * * * * root /bin/sh /tmp/check.sh >> /tmp/last_check.log"
+PID=$$
+INFO="[INFO#${PID}]"
+DEBUG="[DEBUG#${PID}]"
+
 
 #
 # By running this script, we'll assign the following variables into nvram 
@@ -23,16 +29,17 @@ DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
 
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
 
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
 while true
 do
 	if [ $PPTPSRVSUB != '' ]; then
 		# pptp is up
 		PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
 		if [ $PPTPDEV != '' ]; then
-			echo "[INFO] got PPTPDEV as $PPTPDEV, set into nvram" | tee -a $VPNLOG
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
-			echo "[DEBUG] failed to get PPTPDEV, retry in 3 seconds" | tee -a $VPNLOG
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
 			sleep 3
 			continue
 		fi
@@ -40,13 +47,13 @@ do
 		# find the PPTP gw
 		while true
 		do
-			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+) " | cut -d: -f2)
+			PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 			if [ $PPTPGW != '' ]; then
-				echo "[INFO] got PPTPGW as $PPTPGW, set into nvram" | tee -a $VPNLOG
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got PPTPGW as $PPTPGW, set into nvram" >> $VPNLOG
 				nvram set pptp_gw="$PPTPGW"
 				break
 			else
-				echo "[DEBUG] failed to get PPTPGW, retry in 3 seconds" | tee -a $VPNLOG
+				echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPGW, retry in 3 seconds" >> $VPNLOG
 				sleep 3
 				continue
 				# let it fall into endless loop if we still can't find the PPTP gw
@@ -54,19 +61,30 @@ do
 		done
 		
 		# now we hve the PPTPGW, let's modify the routing table
-		echo "[INFO] VPN is UP, trying to modify the routing table" | tee -a $VPNLOG
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") VPN is UP, trying to modify the routing table" >> $VPNLOG
 		cd /tmp; 
 		rm -f $VPNUP
-		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) | tee -a $VPNLOG
-		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) | tee -a $VPNLOG
+		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
+		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
 		rt=$?
-		echo "[DEBUG] return $rt" | tee -a $VPNLOG
+		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
-			echo "[DEBUG] break" | tee -a $VPNLOG
+			# prepare the self-fix script
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
+			/usr/bin/wget "${DLDIR}/cron/check.sh"
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
+			mkdir /tmp/cron.d/
+			#echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
+			nvram set cron_jobs="${CRONJOBS}"
+			nvram get cron_jobs > /tmp/cron.d/cron_jobs
+			nvram set cron_enable=1
+			pidof cron || \
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") break" >> $VPNLOG
 			break; 
 		fi
 	else
-		echo "[INFO] VPN is down, please bring up the PPTP VPN first." | tee -a $VPNLOG
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") VPN is down, please bring up the PPTP VPN first." >> $VPNLOG
 		sleep 10
 	fi
 done
