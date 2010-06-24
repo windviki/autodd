@@ -46,8 +46,8 @@ do
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running client, fixing it." >> $VPNLOG
 				kill $(ps | grep pptp | grep file  | awk '{print $1}' | tail -n1)
 			fi
-			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
-			sleep 3
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 10 seconds" >> $VPNLOG
+			sleep 10
 			continue
 		fi
 
