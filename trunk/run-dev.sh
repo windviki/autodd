@@ -84,7 +84,7 @@ do
 				do
 					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $VPNLOG
 					wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
-					for r in $(grep -v ^# /tmp/flickr)
+					for r in $(grep -v ^# /tmp/$i)
 					do
 						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $VPNLOG
 						route add -net $r gw $(nvram get wan_gateway)
