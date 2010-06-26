@@ -43,7 +43,7 @@ do
 			# see: http://code.google.com/p/autoddvpn/issues/detail?id=6
 			PPTPCCNT=$(ps | grep pptp | grep -c file)
 			if [ $PPTPCCNT -gt 1  ]; then
-				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running client, fixing it." >> $VPNLOG
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, fixing it." >> $VPNLOG
 				kill $(ps | grep pptp | grep file  | awk '{print $1}' | tail -n1)
 			fi
 			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 10 seconds" >> $VPNLOG
