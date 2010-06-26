@@ -87,7 +87,13 @@ do
 					for r in $(grep -v ^# /tmp/$i)
 					do
 						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $VPNLOG
-						route add -net $r gw $(nvram get wan_gateway)
+						# check the item is a subnet or a single ip address
+						echo $r | grep "/" > /dev/null
+						if [ $? -eq 0 ]; then
+							route add -net $r gw $(nvram get wan_gateway) 
+						else
+							route add $r gw $(nvram get wan_gateway) 
+						fi
 					done 
 				done
 				# for custom list of exceptional routes
