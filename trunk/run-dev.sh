@@ -39,8 +39,15 @@ do
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got PPTPDEV as $PPTPDEV, set into nvram" >> $VPNLOG
 			nvram set pptpd_client_dev="$PPTPDEV"
 		else
-			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 3 seconds" >> $VPNLOG
-			sleep 3
+			# check concurrent number of pptp client process to fix bug #6 
+			# see: http://code.google.com/p/autoddvpn/issues/detail?id=6
+			PPTPCCNT=$(ps | grep pptp | grep -c file)
+			if [ $PPTPCCNT -gt 1  ]; then
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, fixing it." >> $VPNLOG
+				kill $(ps | grep pptp | grep file  | awk '{print $1}' | tail -n1)
+			fi
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 10 seconds" >> $VPNLOG
+			sleep 10
 			continue
 		fi
 
@@ -69,6 +76,23 @@ do
 		rt=$?
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
+			# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
+			if [ $(nvram get excroutes_enable) -eq 1 ]; then
+				for i in $(nvram get exroute_list)
+				do
+					echo "fetching exceptional routes for $i"
+					wget http://autoddvpn.googlecode.com/svn/trunk/excroutes.d/$i -O /tmp/$i && \
+					for r in $(grep -v ^# /tmp/flickr)
+					do
+						echo "adding $r via wan_gateway"
+						route add -net $r gw $(nvram get wan_gateway)
+					done 
+				done
+			else
+				echo "$INFO exceptional routes disabled."
+				echo "$INFO exceptional routes features detail:  http://goo.gl/fYfJ"
+			fi
+	
 			# prepare the self-fix script
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
