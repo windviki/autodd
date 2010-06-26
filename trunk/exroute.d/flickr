@@ -1,4 +1,14 @@
 # Flickr
-68.142.192.0/18
-69.147.64.0/18
-67.195.0.0/16
+#68.142.192.0/18
+#69.147.64.0/18
+#67.195.0.0/16
+#static.flickr.com
+68.142.214.43
+#farm2.static.flickr.com
+69.147.90.159
+#farm3.static.flickr.com
+69.147.90.215
+#farm4.static.flickr.com
+67.195.19.66
+#farm5.static.flickr.com
+67.195.19.74
