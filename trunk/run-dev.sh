@@ -94,8 +94,14 @@ do
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $VPNLOG
 				for i in $(nvram get exroute_custom)
 				do
-					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom subnet $i via wan_gateway"  >> $VPNLOG
-					route add -net $i gw $(nvram get wan_gateway)
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom host/subnet $i via wan_gateway"  >> $VPNLOG
+					# check the item is a subnet or a single ip address
+					echo $i | grep "/" > /dev/null
+					if [ $? -eq 0 ]; then
+						route add -net $i gw $(nvram get wan_gateway) 
+					else
+						route add $i gw $(nvram get wan_gateway) 
+					fi
 				done
 			else
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $VPNLOG
