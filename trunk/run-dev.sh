@@ -77,21 +77,22 @@ do
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
 			# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the exceptional routes" >> $VPNLOG
 			if [ $(nvram get exroute_enable) -eq 1 ]; then
-				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes"
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes" >> $VPNLOG
 				for i in $(nvram get exroute_list)
 				do
-					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $VPNLOG
 					wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
 					for r in $(grep -v ^# /tmp/flickr)
 					do
-						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"
+						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $VPNLOG
 						route add -net $r gw $(nvram get wan_gateway)
 					done 
 				done
 			else
-				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."
-				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $VPNLOG
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"  >> $VPNLOG
 			fi
 	
 			# prepare the self-fix script
