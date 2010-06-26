@@ -90,6 +90,13 @@ do
 						route add -net $r gw $(nvram get wan_gateway)
 					done 
 				done
+				# for custom list of exceptional routes
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $VPNLOG
+				for i in $(nvram get exroute_custom)
+				do
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom subnet $i via wan_gateway"  >> $VPNLOG
+					route add -net $i gw $(nvram get wan_gateway)
+				done
 			else
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $VPNLOG
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"  >> $VPNLOG
