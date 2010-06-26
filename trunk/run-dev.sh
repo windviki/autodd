@@ -77,12 +77,12 @@ do
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
 			# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
-			if [ $(nvram get exroutes_enable) -eq 1 ]; then
+			if [ $(nvram get exroute_enable) -eq 1 ]; then
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes"
 				for i in $(nvram get exroute_list)
 				do
 					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"
-					wget http://autoddvpn.googlecode.com/svn/trunk/exroutes.d/$i -O /tmp/$i && \
+					wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
 					for r in $(grep -v ^# /tmp/flickr)
 					do
 						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"
