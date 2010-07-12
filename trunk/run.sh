@@ -76,6 +76,44 @@ do
 		rt=$?
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
+			# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the exceptional routes" >> $VPNLOG
+			if [ $(nvram get exroute_enable) -eq 1 ]; then
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes" >> $VPNLOG
+				for i in $(nvram get exroute_list)
+				do
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $VPNLOG
+					wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
+					for r in $(grep -v ^# /tmp/$i)
+					do
+						echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $VPNLOG
+						# check the item is a subnet or a single ip address
+						echo $r | grep "/" > /dev/null
+						if [ $? -eq 0 ]; then
+							route add -net $r gw $(nvram get wan_gateway) 
+						else
+							route add $r gw $(nvram get wan_gateway) 
+						fi
+					done 
+				done
+				# for custom list of exceptional routes
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $VPNLOG
+				for i in $(nvram get exroute_custom)
+				do
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom host/subnet $i via wan_gateway"  >> $VPNLOG
+					# check the item is a subnet or a single ip address
+					echo $i | grep "/" > /dev/null
+					if [ $? -eq 0 ]; then
+						route add -net $i gw $(nvram get wan_gateway) 
+					else
+						route add $i gw $(nvram get wan_gateway) 
+					fi
+				done
+			else
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $VPNLOG
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"  >> $VPNLOG
+			fi
+	
 			# prepare the self-fix script
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
@@ -87,7 +125,7 @@ do
 			nvram set cron_enable=1
 			pidof cron || \
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
-			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") break" >> $VPNLOG
+			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") ALL DONE!" >> $VPNLOG
 			break; 
 		fi
 	else
