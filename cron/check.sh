@@ -62,11 +62,15 @@ do
 		done
 		
 		# PPTPGW is good, let's check the default GW
-		GW=$(route | grep ^def | head -n1 | awk '{print $2}' )
+		#GW=$(route | grep ^def | head -n1 | awk '{print $2}' )
+		GWDEV=$(route | grep ^def | head -n1 | awk '{print $NF}')
 
-		echo "$DEBUG my current gw is $GW"
-		if [ "${GW}X" != "$(nvram get pptp_gw)X" ]; then
-			echo "current default GW is not $(nvram get pptp_gw)"
+		#echo "$DEBUG my current gw is $GW"
+		echo "$DEBUG my current GWDEV is $GWDEV"
+		#if [ "${GW}X" != "$(nvram get pptp_gw)X" ]; then
+		if [ "${GWDEV}X" != "$(nvram get pptpd_client_dev)X" ]; then
+			#echo "current default GW is not $(nvram get pptp_gw)"
+			echo "current default GWDEV is not $(nvram get pptpd_client_dev)"
 			echo "rebuild the routing tables now"
 			cd /tmp; 
 			test -f $VPNUP && /bin/sh $VPNUP 2>&1
