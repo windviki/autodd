@@ -78,10 +78,10 @@ do
 		# now we hve the PPTPGW, let's modify the routing table
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") VPN is UP, trying to modify the routing table" >> $VPNLOG
 		cd /tmp; 
+		/usr/bin/wget $DLDIR$VPNDOWN
 		rm -f $VPNUP
 		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
 		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
-		/usr/bin/wget $DLDIR$VPNDOWN
 		rt=$?
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
