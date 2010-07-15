@@ -11,6 +11,7 @@ LOCK='/tmp/rc_fw_done'
 #fi
 
 VPNUP='vpnup.sh'
+VPNDOWN='vpndown.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
@@ -44,7 +45,7 @@ do
 			# see: http://code.google.com/p/autoddvpn/issues/detail?id=6
 			PPTPCCNT=$(ps | grep pptp | grep -c file)
 			if [ $PPTPCCNT -gt 1  ]; then
-				if [ $tokillcnt -le 5 ]; then
+				if [ $tokillcnt -le 4 ]; then
 					tokillcnt=$((tokillcnt+1))
 					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, just leave them alone :-) $tokillcnt/5" >> $VPNLOG
 				else
@@ -80,6 +81,7 @@ do
 		rm -f $VPNUP
 		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
 		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
+		/usr/bin/wget $DLDIR$VPNDOWN
 		rt=$?
 		echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") return $rt" >> $VPNLOG
 		if [ $rt -eq 0 ]; then 
