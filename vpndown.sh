@@ -960,7 +960,7 @@ route del -net 61.128.0.0 netmask 255.192.0.0
 route del -net 61.232.0.0 netmask 255.252.0.0
 route del -net 61.236.0.0 netmask 255.254.0.0
 route del -net 61.240.0.0 netmask 255.252.0.0
-route del -host $PPTPSRV 
+#route del -host $PPTPSRV 
 route del default gw $PPTPGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
