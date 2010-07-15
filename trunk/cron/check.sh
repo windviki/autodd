@@ -12,6 +12,7 @@ set -x
 
 #VPNUP='vpnup-dev.sh'
 VPNUP='vpnup.sh'
+VPNDOWN='vpndown.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
@@ -73,6 +74,7 @@ do
 			echo "current default GWDEV is not $(nvram get pptpd_client_dev)"
 			echo "rebuild the routing tables now"
 			cd /tmp; 
+			test -f $VPNDOWN && /bin/sh $VPNDOWN 2>&1
 			test -f $VPNUP && /bin/sh $VPNUP 2>&1
 			#rm -f $VPNUP
 			##( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG

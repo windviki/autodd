@@ -3,6 +3,7 @@ export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
+PPTPGW=$(nvram get pptp_gw)
 
 echo "[INFO] removing the static routes"
 
