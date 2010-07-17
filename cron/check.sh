@@ -81,8 +81,8 @@ do
 			#( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
 		else                                                              
 			# try to fix bug                                          
-			ping -c 3 $(nvram get pptp_gw) > /dev/null && \           
-			ping -c 3 8.8.8.8 || \                                    
+			ping -c 10 $(nvram get pptp_gw) > /dev/null && \           
+			ping -c 10 8.8.8.8 || \                                    
 			( echo "pptp_gw is good but can't approach 8.8.8.8";     
 			echo "we probably hit a known bug, reboot the router now."  
 			echo "(detail: http://code.google.com/p/autoddvpn/issues/detail?id=10)"  
