@@ -79,7 +79,14 @@ do
 			#rm -f $VPNUP
 			##( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
 			#( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
-		else
+		else                                                              
+			# try to fix bug                                          
+			ping -c 3 $(nvram get pptp_gw) > /dev/null && \           
+			ping -c 3 8.8.8.8 || \                                    
+			( echo "pptp_gw is good but can't approach 8.8.8.8";     
+			echo "we probably hit a known but, reboot the router now."  
+         reboot;  exit; )                                               
+                                                                                      
 			echo "everything is GOOD, let's go back to sleep"
 			break
 		fi
