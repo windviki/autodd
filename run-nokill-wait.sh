@@ -126,14 +126,15 @@ do
 			# prepare the self-fix script
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
-			mkdir /tmp/cron.d/
-			#echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
-			nvram set cron_jobs="${CRONJOBS}"
-			nvram get cron_jobs > /tmp/cron.d/cron_jobs
-			nvram set cron_enable=1
-			pidof cron || \
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
+
+			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
+			#mkdir /tmp/cron.d/
+			#nvram set cron_jobs="${CRONJOBS}"
+			#nvram get cron_jobs > /tmp/cron.d/cron_jobs
+			#nvram set cron_enable=1
+			#pidof cron || \
+			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
+
 			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") ALL DONE!" >> $VPNLOG
 			break; 
 		fi
