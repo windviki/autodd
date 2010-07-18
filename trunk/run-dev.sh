@@ -25,8 +25,6 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetch check.sh" >> $VPNLOG
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPUP" >> $VPNLOG
 
-ls -al /tmp/pptpd_client/ >> $VPNLOG
-ls /tmp/pptpd_client >> $VPNLOG
 for i in 1 2 3 4 5 6 7 8 9 10 11 12
 do
 	if [ -e $IPUP ]; then
