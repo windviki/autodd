@@ -138,7 +138,7 @@ do
 			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
 
 			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") ALL DONE!" >> $VPNLOG
-			route | grep ^default | awk '{print $2}'
+			route | grep ^default | awk '{print $2}' >> $VPNLOG
 			break; 
 		fi
 	else
