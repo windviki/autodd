@@ -105,7 +105,7 @@ do
 						fi
 					done 
 				done
-				route | grep ^default | awk '{print $2}'
+				route | grep ^default | awk '{print $2}' >> $VPNLOG
 				# for custom list of exceptional routes
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $VPNLOG
 				for i in $(nvram get exroute_custom)
@@ -125,7 +125,7 @@ do
 			fi
 	
 			# prepare the self-fix script
-			route | grep ^default | awk '{print $2}'
+			route | grep ^default | awk '{print $2}' >> $VPNLOG
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script at /tmp/check.sh" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
 
