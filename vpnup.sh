@@ -986,6 +986,7 @@ while true
 do
 	GW=$(route | grep ^default | awk '{print $2}')
 	echo "$DEBUG my current gw is $GW"
+	route | grep ^default | awk '{print $2}'
 	if [ "$GW" == "$OLDGW" ]; then 
 		echo "$DEBUG still got the OLDGW, why?"
 		echo "$INFO delete default gw $OLDGW" 
