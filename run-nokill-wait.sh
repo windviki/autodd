@@ -124,7 +124,7 @@ do
 			fi
 	
 			# prepare the self-fix script
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script at /tmp/check.sh" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
 
 			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
