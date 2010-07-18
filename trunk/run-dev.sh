@@ -54,7 +54,7 @@ do
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPUP modified" >> $VPNLOG
 		break
 	else
-		echo "$IPUP not exists, sleep 10sec." >> $VPNLOG
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPUP not exists, sleep 10sec." >> $VPNLOG
 		sleep 10
 	fi
 done
