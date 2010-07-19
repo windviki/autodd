@@ -3,6 +3,7 @@ export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
+PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
 PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 #PPTPGW=$(nvram get pptp_gw)
