@@ -1,6 +1,8 @@
 #!/bin/sh
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
+echo "[INFO] vpnup.sh started at $(date "+%d/%b/%Y:%H:%M:%S")"
+
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
@@ -1003,3 +1005,4 @@ do
 done
 
 echo "$INFO static routes added"
+echo "[INFO] vpnup.sh ended at $(date "+%d/%b/%Y:%H:%M:%S")"
