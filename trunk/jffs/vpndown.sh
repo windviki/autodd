@@ -2,7 +2,7 @@
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 LOG='/tmp/autoddvpn.log'
-echo "[INFO] vpndown.sh started at $(date "+%d/%b/%Y:%H:%M:%S")" >> $LOG
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh started" >> $LOG
 
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
@@ -968,4 +968,4 @@ route del -net 61.240.0.0 netmask 255.252.0.0
 route del default gw $PPTPGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
-echo "[INFO] vpndown.sh ended at $(date "+%d/%b/%Y:%H:%M:%S")" >> $LOG
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
