@@ -2,7 +2,7 @@
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 LOG='/tmp/autoddvpn.log'
-echo "[INFO] vpnup.sh started at $(date "+%d/%b/%Y:%H:%M:%S")" >> $LOG
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh started" >> $LOG
 
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
@@ -1006,4 +1006,4 @@ do
 done
 
 echo "$INFO static routes added"
-echo "[INFO] vpnup.sh ended at $(date "+%d/%b/%Y:%H:%M:%S")" >> $LOG
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
