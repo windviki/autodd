@@ -11,6 +11,7 @@ LOCK='/tmp/rc_fw_done'
 #fi
 
 VPNUP='vpnup.sh'
+VPNDOWN='vpndown.sh'
 VPNLOG='/tmp/autoddvpn.log'
 PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
 DLDIR='http://autoddvpn.googlecode.com/svn/trunk/'
@@ -30,6 +31,7 @@ DEBUG="[DEBUG#${PID}]"
 #ping -W 3 -c 1 $VPNIP > /dev/null 2>&1 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
+tokillcnt=0
 while true
 do
 	if [ $PPTPSRVSUB != '' ]; then
@@ -43,8 +45,14 @@ do
 			# see: http://code.google.com/p/autoddvpn/issues/detail?id=6
 			PPTPCCNT=$(ps | grep pptp | grep -c file)
 			if [ $PPTPCCNT -gt 1  ]; then
-				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, fixing it." >> $VPNLOG
-				kill $(ps | grep pptp | grep file  | awk '{print $1}' | tail -n1)
+				if [ $tokillcnt -le 4 ]; then
+					tokillcnt=$((tokillcnt+1))
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, just leave them alone :-) $tokillcnt/5" >> $VPNLOG
+				else
+					echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got concurrent $PPTPCCNT running clients, fixing it." >> $VPNLOG
+					kill $(ps | grep pptp | grep file  | awk '{print $1}' | tail -n1)
+					tokillcnt=0
+				fi
 			fi
 			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") failed to get PPTPDEV, retry in 10 seconds" >> $VPNLOG
 			sleep 10
@@ -70,6 +78,7 @@ do
 		# now we hve the PPTPGW, let's modify the routing table
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") VPN is UP, trying to modify the routing table" >> $VPNLOG
 		cd /tmp; 
+		/usr/bin/wget $DLDIR$VPNDOWN
 		rm -f $VPNUP
 		#( /usr/bin/wget $DLDIR$VPNUP -O - | /bin/sh  2>&1 ) >> $VPNLOG
 		( /usr/bin/wget $DLDIR$VPNUP && /bin/sh $VPNUP 2>&1 ) >> $VPNLOG
@@ -96,6 +105,7 @@ do
 						fi
 					done 
 				done
+				route | grep ^default | awk '{print $2}' >> $VPNLOG
 				# for custom list of exceptional routes
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $VPNLOG
 				for i in $(nvram get exroute_custom)
@@ -115,17 +125,20 @@ do
 			fi
 	
 			# prepare the self-fix script
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script" >> $VPNLOG
+			route | grep ^default | awk '{print $2}' >> $VPNLOG
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the self-fix script at /tmp/check.sh" >> $VPNLOG
 			/usr/bin/wget "${DLDIR}/cron/check.sh"
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
-			mkdir /tmp/cron.d/
-			#echo "${CRONJOBS}" >> /tmp/cron.d/cron_jobs
-			nvram set cron_jobs="${CRONJOBS}"
-			nvram get cron_jobs > /tmp/cron.d/cron_jobs
-			nvram set cron_enable=1
-			pidof cron || \
-			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
+
+			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the cron_job" >> $VPNLOG
+			#mkdir /tmp/cron.d/
+			#nvram set cron_jobs="${CRONJOBS}"
+			#nvram get cron_jobs > /tmp/cron.d/cron_jobs
+			#nvram set cron_enable=1
+			#pidof cron || \
+			#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") cron not running, starting the cron ..." && cron
+
 			echo "$DEBUG $(date "+%d/%b/%Y:%H:%M:%S") ALL DONE!" >> $VPNLOG
+			route | grep ^default | awk '{print $2}' >> $VPNLOG
 			break; 
 		fi
 	else
