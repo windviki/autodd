@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 
@@ -14,6 +15,7 @@ for i in 1 2 3 4 5 6
 do
    if [ -f $LOCK ]; then
       echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got $LOCK , sleep 10 secs. #$i/6" >> $LOG
+      LOCKED=1
       sleep 10
    else
       break
@@ -24,19 +26,20 @@ if [ -f $LOCK ]; then
 	echo "$ERROR $(date "+%d/%b/%Y:%H:%M:%S") still got $LOCK , I'm aborted. Fix me." >> $LOG
 	exit 0
 else
-	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+	test $LOCKED -eq 1 && echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+	LOCKED=0
 fi
 	
 # create the lock
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
 
 
+OLDGW=$(nvram get wan_gateway)                          
+OPENVPNSRV=$(nvram get openvpncl_remoteip)              
+OPENVPNDEV='tun0'                                              
+OPENVPNGW=$(ifconfig $OPENVPNDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 
 
-
-OLDGW=$(nvram get wan_gateway)
-PPTPSRV=$(nvram get pptpd_client_srvip)
-PPTPGW=$(nvram get pptp_gw)
 
 echo "[INFO] removing the static routes"
 
@@ -994,8 +997,11 @@ route del -net 61.128.0.0 netmask 255.192.0.0
 route del -net 61.232.0.0 netmask 255.252.0.0
 route del -net 61.236.0.0 netmask 255.254.0.0
 route del -net 61.240.0.0 netmask 255.252.0.0
-#route del -host $PPTPSRV 
-route del default gw $PPTPGW
+#route del -host $OPENVPNSRV 
+route del default gw $OPENVPNGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
-echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
+
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
+# release the lock                                                                                
+rm -f $LOCK  
