@@ -1,4 +1,6 @@
 #!/bin/sh
+
+set -x
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 LOG='/tmp/autoddvpn.log'
@@ -13,6 +15,7 @@ for i in 1 2 3 4 5 6
 do
 	if [ -f $LOCK ]; then
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got $LOCK , sleep 10 secs. #$i/6" >> $LOG
+		LOCKED=1
 		sleep 10
 	else
 		break
@@ -23,7 +26,8 @@ if [ -f $LOCK ]; then
    echo "$ERROR $(date "+%d/%b/%Y:%H:%M:%S") still got $LOCK , I'm aborted. Fix me." >> $LOG
    exit 0
 else
-	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+	test $LOCKED -eq 1 && echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+	LOCKED=0
 fi
 
 # create the lock
@@ -32,11 +36,11 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
 	
 
 OLDGW=$(nvram get wan_gateway)
-PPTPSRV=$(nvram get pptpd_client_srvip)
-PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
-PPTPDEV=$(route | grep ^$PPTPSRVSUB | awk '{print $NF}')
-PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
-#PPTPGW=$(nvram get pptp_gw)
+OPENVPNSRV=$(nvram get openvpncl_remoteip)
+#OPENVPNSRVSUB=$(nvram get OPENVPNd_client_srvsub)
+#OPENVPNDEV=$(route | grep ^$OPENVPNSRVSUB | awk '{print $NF}')
+OPENVPNDEV='tun0'
+OPENVPNGW=$(ifconfig $OPENVPNDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 
 
 if [ $OLDGW == '' ]; then
@@ -46,12 +50,12 @@ else
 	echo "$INFO OLDGW is $OLDGW"
 fi
 
-route add -host $PPTPSRV gw $OLDGW
+route add -host $OPENVPNSRV gw $OLDGW
 echo "$INFO delete default gw $OLDGW" 
 route del default gw $OLDGW
 
-echo "$INFO add default gw $PPTPGW" 
-route add default gw $PPTPGW
+echo "$INFO add default gw $OPENVPNGW" 
+route add default gw $OPENVPNGW
 
 echo "$INFO adding the static routes, this may take a while."
 route add -net 1.12.0.0 netmask 255.252.0.0 gw $OLDGW
@@ -1011,7 +1015,7 @@ route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
 
 # final check again
 echo "$INFO final check the default gw"
-while true
+for i in 1 2 3 4 5 6
 do
 	GW=$(route | grep ^default | awk '{print $2}')
 	echo "$DEBUG my current gw is $GW"
@@ -1020,8 +1024,8 @@ do
 		echo "$DEBUG still got the OLDGW, why?"
 		echo "$INFO delete default gw $OLDGW" 
 		route del default gw $OLDGW
-		echo "$INFO add default gw $PPTPGW again" 
-		route add default gw $PPTPGW
+		echo "$INFO add default gw $OPENVPNGW again" 
+		route add default gw $OPENVPNGW
 		sleep 3
 	else
 		break
@@ -1029,6 +1033,6 @@ do
 done
 
 echo "$INFO static routes added"
-echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
 # release the lock
 rm -f $LOCK
