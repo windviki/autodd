@@ -1038,7 +1038,7 @@ if [ $(nvram get exroute_enable) -eq 1 ]; then
 			fi
 		done 
 	done
-	route | grep ^default | awk '{print $2}' >> $LOG
+	#route | grep ^default | awk '{print $2}' >> $LOG
 	# for custom list of exceptional routes
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $LOG
 	for i in $(nvram get exroute_custom)
