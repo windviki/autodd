@@ -6,6 +6,7 @@ export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 LOG='/tmp/autoddvpn.log'
 LOCK='/tmp/autoddvpn.lock'
 PID=$$
+EXROUTEDIR='/jffs/exroute.d'
 INFO="[INFO#${PID}]"
 DEBUG="[DEBUG#${PID}]"
 ERROR="[ERROR#${PID}]"
@@ -1012,6 +1013,50 @@ route add -net 61.128.0.0 netmask 255.192.0.0 gw $OLDGW
 route add -net 61.232.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 61.236.0.0 netmask 255.254.0.0 gw $OLDGW
 route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
+
+# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the exceptional routes" >> $LOG
+if [ $(nvram get exroute_enable) -eq 1 ]; then
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes" >> $LOG
+	for i in $(nvram get exroute_list)
+	do
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $LOG
+		#wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
+		if [ ! -f $EXROUTEDIR/$i ]; then
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $EXROUTEDIR/$i not found, skip."  >> $LOG
+			continue
+		fi
+		for r in $(grep -v ^# $EXROUTEDIR/$i)
+		do
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $LOG
+			# check the item is a subnet or a single ip address
+			echo $r | grep "/" > /dev/null
+			if [ $? -eq 0 ]; then
+				route add -net $r gw $(nvram get wan_gateway) 
+			else
+				route add $r gw $(nvram get wan_gateway) 
+			fi
+		done 
+	done
+	route | grep ^default | awk '{print $2}' >> $LOG
+	# for custom list of exceptional routes
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $LOG
+	for i in $(nvram get exroute_custom)
+	do
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom host/subnet $i via wan_gateway"  >> $LOG
+		# check the item is a subnet or a single ip address
+		echo $i | grep "/" > /dev/null
+		if [ $? -eq 0 ]; then
+			route add -net $i gw $(nvram get wan_gateway) 
+		else
+			route add $i gw $(nvram get wan_gateway) 
+		fi
+	done
+else
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $LOG
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"  >> $LOG
+fi
+
 
 # final check again
 echo "$INFO final check the default gw"
