@@ -15,6 +15,9 @@ IPDOWN="/tmp/openvpncl/route-down.sh"
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
 
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") temporarily set date to 20100729 to fix openvpn SSL/TLS issue. see http://goo.gl/bb6a" >> $VPNLOG
+date 20100729
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPUP" >> $VPNLOG
 
