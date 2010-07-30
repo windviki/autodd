@@ -1062,9 +1062,10 @@ fi
 echo "$INFO final check the default gw"
 for i in 1 2 3 4 5 6
 do
-	GW=$(route | grep ^default | awk '{print $2}')
+	#GW=$(route | grep ^default | awk '{print $2}')
+	GW=$(route -n | grep ^0.0.0.0 | awk '{print $2}')
 	echo "$DEBUG my current gw is $GW"
-	route | grep ^default | awk '{print $2}'
+	#route | grep ^default | awk '{print $2}'
 	if [ "$GW" == "$OLDGW" ]; then 
 		echo "$DEBUG still got the OLDGW, why?"
 		echo "$INFO delete default gw $OLDGW" 
