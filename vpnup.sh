@@ -1,4 +1,6 @@
 #!/bin/sh
+
+set -x
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 LOG='/tmp/autoddvpn.log'
@@ -33,11 +35,27 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
 	
 
 OLDGW=$(nvram get wan_gateway)
-PPTPSRV=$(nvram get pptpd_client_srvip)
-PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
-PPTPDEV=$(route -n | grep ^$PPTPSRVSUB | awk '{print $NF}')
-PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
-#PPTPGW=$(nvram get pptp_gw)
+
+case $1 in
+	"pptp")
+		VPNSRV=$(nvram get pptpd_client_srvip)
+		VPNSRVSUB=$(nvram get pptpd_client_srvsub)
+		PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
+		VPNGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+		#VPNGW=$(nvram get pptp_gw)
+		;;
+	"openvpn")
+		VPNSRV=$(nvram get openvpncl_remoteip)
+		#OPENVPNSRVSUB=$(nvram get OPENVPNd_client_srvsub)
+		#OPENVPNDEV=$(route | grep ^$OPENVPNSRVSUB | awk '{print $NF}')
+		OPENVPNDEV='tun0'
+		VPNGW=$(ifconfig $OPENVPNDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+		;;
+	*)
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") unknown vpnup.sh parameter,quit." >> $LOCK
+		exit 1
+esac
+
 
 
 if [ $OLDGW == '' ]; then
@@ -47,12 +65,12 @@ else
 	echo "$INFO OLDGW is $OLDGW"
 fi
 
-route add -host $PPTPSRV gw $OLDGW
+route add -host $VPNSRV gw $OLDGW
 echo "$INFO delete default gw $OLDGW" 
 route del default gw $OLDGW
 
-echo "$INFO add default gw $PPTPGW" 
-route add default gw $PPTPGW
+echo "$INFO add default gw $VPNGW" 
+route add default gw $VPNGW
 
 echo "$INFO adding the static routes, this may take a while."
 route add -net 1.12.0.0 netmask 255.252.0.0 gw $OLDGW
@@ -1065,8 +1083,8 @@ do
 		echo "$DEBUG still got the OLDGW, why?"
 		echo "$INFO delete default gw $OLDGW" 
 		route del default gw $OLDGW
-		echo "$INFO add default gw $PPTPGW again" 
-		route add default gw $PPTPGW
+		echo "$INFO add default gw $VPNGW again" 
+		route add default gw $VPNGW
 		sleep 3
 	else
 		break
