@@ -21,14 +21,14 @@ cd /tmp
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh" >> $VPNLOG
 for i in 1 2 3 4 5
 do
-	/usr/bin/wget $DLDIR$VPNUP && chmod +x $VPNUP && break
+	/usr/bin/wget $DLDIR$VPNUP && chmod +x $VPNUP && break || echo "failed, trying again"
 	#echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
 done
 
 for i in 1 2 3 4 5
 do
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpndown.sh" >> $VPNLOG
-	/usr/bin/wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break
+	/usr/bin/wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break || echo "failed, trying again"
 	#echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
 done
 
