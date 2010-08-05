@@ -1,4 +1,6 @@
 #!/bin/sh
+
+set -x
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
 
@@ -35,8 +37,24 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
 
 
 OLDGW=$(nvram get wan_gateway)
-PPTPSRV=$(nvram get pptpd_client_srvip)
-PPTPGW=$(nvram get pptp_gw)
+
+case $1 in 
+		"pptp")
+			PPTPSRV=$(nvram get pptpd_client_srvip)
+			VPNGW=$(nvram get pptp_gw)
+			;;
+		"openvpn")
+			OPENVPNSRV=$(nvram get openvpncl_remoteip)
+			OPENVPNDEV='tun0'
+			VPNGW=$(ifconfig $OPENVPNDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+			;;
+		*)
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") unknown vpndown.sh parameter, quit." >> $LOCK
+			exit 1
+			;;
+esac
+			
+
 
 echo "[INFO] removing the static routes"
 
@@ -995,7 +1013,7 @@ route del -net 61.232.0.0 netmask 255.252.0.0
 route del -net 61.236.0.0 netmask 255.254.0.0
 route del -net 61.240.0.0 netmask 255.252.0.0
 #route del -host $PPTPSRV 
-route del default gw $PPTPGW
+route del default gw $VPNGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
 echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
