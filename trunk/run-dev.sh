@@ -15,6 +15,17 @@ IPDOWN="/tmp/pptpd_client/ip-down"
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+do
+	if [ "$(nvram get wan_gateway)X" == "X" ]; then
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") wan is offline, sleep 3 sec." >> $VPNLOG
+		sleep 3
+	else
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") wan is online." >> $VPNLOG
+		break
+	fi
+done
+
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh vpndown.sh" >> $VPNLOG
 cd /tmp
 /usr/bin/wget $DLDIR$VPNUP
