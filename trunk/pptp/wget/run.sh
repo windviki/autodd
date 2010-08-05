@@ -19,11 +19,11 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
 
 cd /tmp
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh" >> $VPNLOG
-#/usr/bin/wget $DLDIR$VPNUP && chmod +x $VPNUP
-echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
+/usr/bin/wget $DLDIR$VPNUP && chmod +x $VPNUP
+#echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpndown.sh" >> $VPNLOG
-#/usr/bin/wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN
-echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
+/usr/bin/wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN
+#echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPUP" >> $VPNLOG
