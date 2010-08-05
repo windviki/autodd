@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -x 
 VPNUP='vpnup.sh'
 VPNDOWN='vpndown.sh'
 VPNLOG='/tmp/autoddvpn.log'
@@ -14,13 +15,10 @@ IPDOWN="/tmp/pptpd_client/ip-down"
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
-
-echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetch vpnup.sh" >> $VPNLOG
-/usr/bin/wget $DLDIR$VPNUP 2>&1 
-echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetch vpndown.sh" >> $VPNLOG
-/usr/bin/wget $DLDIR$VPNDOWN 2>&1
-echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetch check.sh" >> $VPNLOG
-/usr/bin/wget "${DLDIR}/cron/check.sh"
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh vpndown.sh" >> $VPNLOG
+cd /tmp
+/usr/bin/wget $DLDIR$VPNUP
+/usr/bin/wget $DLDIR$VPNDOWN
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPUP" >> $VPNLOG
@@ -28,7 +26,7 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPUP" >> $VPNLOG
 for i in 1 2 3 4 5 6 7 8 9 10 11 12
 do
 	if [ -e $IPUP ]; then
-		sed -ie 's#exit 0#/bin/sh /tmp/vpnup.sh\nexit 0#g' $IPUP
+		sed -ie 's#exit 0#/tmp/vpnup.sh\nexit 0#g' $IPUP
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPUP modified" >> $VPNLOG
 		break
 	else
@@ -39,7 +37,7 @@ done
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPDOWN" >> $VPNLOG
 if [ -e $IPDOWN ]; then
-	sed -ie 's#exit 0#/bin/sh /tmp/vpndown.sh\nexit 0#g' $IPDOWN
+	sed -ie 's#exit 0#/tmp/vpndown.sh\nexit 0#g' $IPDOWN
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPDOWN modified" >> $VPNLOG
 else
 	echo "$IPDOWN not exists" >> $VPNLOG

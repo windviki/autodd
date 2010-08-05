@@ -1,13 +1,43 @@
 #!/bin/sh
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
-OLDGW=$(nvram get wan_gateway)
-PPTPSRV=$(nvram get pptpd_client_srvip)
-PPTPGW=$(nvram get pptp_gw)
+LOG='/tmp/autoddvpn.log'
+LOCK='/tmp/autoddvpn.lock'
 PID=$$
+EXROUTEDIR='/jffs/exroute.d'
 INFO="[INFO#${PID}]"
 DEBUG="[DEBUG#${PID}]"
 ERROR="[ERROR#${PID}]"
+
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh started" >> $LOG
+for i in 1 2 3 4 5 6
+do
+	if [ -f $LOCK ]; then
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got $LOCK , sleep 10 secs. #$i/6" >> $LOG
+		sleep 10
+	else
+		break
+	fi
+done
+
+if [ -f $LOCK ]; then
+   echo "$ERROR $(date "+%d/%b/%Y:%H:%M:%S") still got $LOCK , I'm aborted. Fix me." >> $LOG
+   exit 0
+else
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+fi
+
+# create the lock
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
+	
+	
+
+OLDGW=$(nvram get wan_gateway)
+PPTPSRV=$(nvram get pptpd_client_srvip)
+PPTPSRVSUB=$(nvram get pptpd_client_srvsub)
+PPTPDEV=$(route -n | grep ^$PPTPSRVSUB | awk '{print $NF}')
+PPTPGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+#PPTPGW=$(nvram get pptp_gw)
 
 
 if [ $OLDGW == '' ]; then
@@ -980,11 +1010,55 @@ route add -net 61.232.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 61.236.0.0 netmask 255.254.0.0 gw $OLDGW
 route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
 
+
+# prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the exceptional routes" >> $LOG
+if [ $(nvram get exroute_enable) -eq 1 ]; then
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes" >> $LOG
+	for i in $(nvram get exroute_list)
+	do
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $LOG
+		#wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
+		if [ ! -f $EXROUTEDIR/$i ]; then
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $EXROUTEDIR/$i not found, skip."  >> $LOG
+			continue
+		fi
+		for r in $(grep -v ^# $EXROUTEDIR/$i)
+		do
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding $r via wan_gateway"  >> $LOG
+			# check the item is a subnet or a single ip address
+			echo $r | grep "/" > /dev/null
+			if [ $? -eq 0 ]; then
+				route add -net $r gw $(nvram get wan_gateway) 
+			else
+				route add $r gw $(nvram get wan_gateway) 
+			fi
+		done 
+	done
+	#route | grep ^default | awk '{print $2}' >> $LOG
+	# for custom list of exceptional routes
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying custom exceptional routes if available" >> $LOG
+	for i in $(nvram get exroute_custom)
+	do
+		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding custom host/subnet $i via wan_gateway"  >> $LOG
+		# check the item is a subnet or a single ip address
+		echo $i | grep "/" > /dev/null
+		if [ $? -eq 0 ]; then
+			route add -net $i gw $(nvram get wan_gateway) 
+		else
+			route add $i gw $(nvram get wan_gateway) 
+		fi
+	done
+else
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes disabled."  >> $LOG
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") exceptional routes features detail:  http://goo.gl/fYfJ"  >> $LOG
+fi
+
 # final check again
 echo "$INFO final check the default gw"
 while true
 do
-	GW=$(route | grep ^default | awk '{print $2}')
+	GW=$(route -n | grep ^0.0.0.0 | awk '{print $2}')
 	echo "$DEBUG my current gw is $GW"
 	route | grep ^default | awk '{print $2}'
 	if [ "$GW" == "$OLDGW" ]; then 
@@ -1000,3 +1074,6 @@ do
 done
 
 echo "$INFO static routes added"
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
+# release the lock
+rm -f $LOCK

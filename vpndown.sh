@@ -1,6 +1,39 @@
 #!/bin/sh
 export PATH="/bin:/sbin:/usr/sbin:/usr/bin"
 
+
+LOG='/tmp/autoddvpn.log'
+LOCK='/tmp/autoddvpn.lock'
+PID=$$
+INFO="[INFO#${PID}]"
+DEBUG="[DEBUG#${PID}]"
+ERROR="[ERROR#${PID}]"
+
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh started" >> $LOG
+for i in 1 2 3 4 5 6
+do
+   if [ -f $LOCK ]; then
+      echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") got $LOCK , sleep 10 secs. #$i/6" >> $LOG
+      sleep 10
+   else
+      break
+   fi
+done
+
+if [ -f $LOCK ]; then
+	echo "$ERROR $(date "+%d/%b/%Y:%H:%M:%S") still got $LOCK , I'm aborted. Fix me." >> $LOG
+	exit 0
+else
+	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+fi
+	
+# create the lock
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
+
+
+
+
+
 OLDGW=$(nvram get wan_gateway)
 PPTPSRV=$(nvram get pptpd_client_srvip)
 PPTPGW=$(nvram get pptp_gw)
@@ -965,3 +998,4 @@ route del -net 61.240.0.0 netmask 255.252.0.0
 route del default gw $PPTPGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
+echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
