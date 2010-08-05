@@ -999,3 +999,7 @@ route del default gw $PPTPGW
 echo "[INFO] add $OLDGW back as the default gw"
 route add default gw $OLDGW
 echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
+
+# release the lock                                                                                
+rm -f $LOCK
+
