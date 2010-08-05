@@ -25,9 +25,10 @@ done
 if [ -f $LOCK ]; then
    echo "$ERROR $(date "+%d/%b/%Y:%H:%M:%S") still got $LOCK , I'm aborted. Fix me." >> $LOG
    exit 0
-else
-	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
 fi
+#else
+#	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $LOCK was released, let's continue." >> $LOG
+#fi
 
 # create the lock
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup" >> $LOCK
