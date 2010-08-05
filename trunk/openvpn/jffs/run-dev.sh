@@ -25,7 +25,7 @@ for i in 1 2 3 4 5 6 7 8 9 10 11 12
 do
 	if [ -e $IPUP ]; then
 		#sed -ie 's#exit 0#/jffs/vpnup.sh\nexit 0#g' $IPUP
-		echo '/jffs/openvpn/vpnup.sh' >> $IPUP
+		echo '/jffs/openvpn/vpnup.sh openvpn' >> $IPUP
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPUP modified" >> $VPNLOG
 		break
 	else
@@ -37,7 +37,7 @@ done
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying $IPDOWN" >> $VPNLOG
 if [ -e $IPDOWN ]; then
 	#sed -ie 's#exit 0#/jffs/vpndown.sh\nexit 0#g' $IPDOWN
-	echo '/jffs/openvpn/vpndown.sh' >> $IPDOWN
+	echo '/jffs/openvpn/vpndown.sh openvpn' >> $IPDOWN
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $IPDOWN modified" >> $VPNLOG
 else
 	echo "$IPDOWN not exists" >> $VPNLOG
