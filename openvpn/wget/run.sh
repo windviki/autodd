@@ -14,6 +14,8 @@ IPDOWN="/tmp/openvpncl/route-down.sh"
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") openvpn+wget mode" >> $VPNLOG
+
 cd /tmp;
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") wgetting vpnup.sh" >> $VPNLOG
 wget "${DLDIR}vpnup.sh" && chmod a+x vpnup.sh
