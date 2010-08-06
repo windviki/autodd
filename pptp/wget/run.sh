@@ -16,6 +16,7 @@ IPDOWN="/tmp/pptpd_client/ip-down"
 
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") log starts" >> $VPNLOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") pptp+wget mode" >> $VPNLOG
 
 cd /tmp
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh" >> $VPNLOG
