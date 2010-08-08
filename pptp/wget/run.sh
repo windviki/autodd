@@ -22,8 +22,11 @@ cd /tmp
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh" >> $VPNLOG
 for i in 1 2 3 4 5
 do
-	#/usr/bin/wget $DLDIR$VPNUP && chmod +x $VPNUP && break || echo "$INFO failed, trying again"
-	echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
+	if [ $(which nc) ]; then
+		echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
+	else
+		wget $DLDIR$VPNUP && chmod +x $VPNUP && break || echo "$INFO failed, trying again"
+	fi
 	if [ $(wc -l $VPNUP | awk '{print $1}') -ne 0 ]; then break; else echo "$INFO failed, retry"; fi
 	sleep 3
 done
@@ -31,8 +34,11 @@ done
 for i in 1 2 3 4 5
 do
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpndown.sh" >> $VPNLOG
-	#/usr/bin/wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break || echo "$INFO failed, trying again"
-	echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
+	if [ $(which nc) ]; then
+		echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
+	else
+		wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break || echo "$INFO failed, trying again"
+	fi
 	if [ $(wc -l $VPNDOWN | awk '{print $1}') -ne 0 ]; then break; else echo "$INFO failed, retry"; fi
 	sleep 3
 done
