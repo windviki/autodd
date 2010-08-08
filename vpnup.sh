@@ -1100,6 +1100,6 @@ do
 done
 
 echo "$INFO static routes added"
-echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpnup.sh ended" >> $LOG
 # release the lock
 rm -f $LOCK

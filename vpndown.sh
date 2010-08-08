@@ -1014,9 +1014,9 @@ route del -net 61.236.0.0 netmask 255.254.0.0
 route del -net 61.240.0.0 netmask 255.252.0.0
 #route del -host $PPTPSRV 
 route del default gw $VPNGW
-echo "[INFO] add $OLDGW back as the default gw"
+echo "$INFO add $OLDGW back as the default gw"
 route add default gw $OLDGW
-echo "[INFO] $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") vpndown.sh ended" >> $LOG
 
 # release the lock                                                                                
 rm -f $LOCK
