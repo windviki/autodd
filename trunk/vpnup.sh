@@ -67,10 +67,10 @@ else
 fi
 
 route add -host $VPNSRV gw $OLDGW
-echo "$INFO delete default gw $OLDGW"  >> $LOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") delete default gw $OLDGW"  >> $LOG
 route del default gw $OLDGW
 
-echo "$INFO add default gw $VPNGW"  >> $LOG
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") add default gw $VPNGW"  >> $LOG
 route add default gw $VPNGW
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take a while." >> $LOG
