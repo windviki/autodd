@@ -60,20 +60,20 @@ esac
 
 
 if [ $OLDGW == '' ]; then
-	echo "$ERROR OLDGW is empty, is the WAN disconnected?"
+	echo "$ERROR OLDGW is empty, is the WAN disconnected?" >> $LOG
 	exit 0
 else
-	echo "$INFO OLDGW is $OLDGW"
+	echo "$INFO OLDGW is $OLDGW" 
 fi
 
 route add -host $VPNSRV gw $OLDGW
-echo "$INFO delete default gw $OLDGW" 
+echo "$INFO delete default gw $OLDGW"  >> $LOG
 route del default gw $OLDGW
 
-echo "$INFO add default gw $VPNGW" 
+echo "$INFO add default gw $VPNGW"  >> $LOG
 route add default gw $VPNGW
 
-echo "$INFO adding the static routes, this may take a while."
+echo "$INFO adding the static routes, this may take a while." >> $LOG
 route add -net 1.12.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 1.24.0.0 netmask 255.248.0.0 gw $OLDGW
 route add -net 110.6.0.0 netmask 255.254.0.0 gw $OLDGW
