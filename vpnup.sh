@@ -1034,10 +1034,17 @@ route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") preparing the exceptional routes" >> $LOG
 if [ $(nvram get exroute_enable) -eq 1 ]; then
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") modifying the exceptional routes" >> $LOG
+	if [ ! -d $EXROUTEDIR ]; then
+		EXROUTEDIR='/tmp/exroute.d'
+		mkdir $EXROUTEDIR
+	fi
 	for i in $(nvram get exroute_list)
 	do
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") fetching exceptional routes for $i"  >> $LOG
-		#wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O /tmp/$i && \
+		if [ -d $EXROUTEDIR -a ! -f $EXROUTEDIR/$i ]; then
+			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") missing $EXROUTEDIR/$i, wget it now."  >> $LOG
+			wget http://autoddvpn.googlecode.com/svn/trunk/exroute.d/$i -O $EXROUTEDIR/$i 
+		fi
 		if [ ! -f $EXROUTEDIR/$i ]; then
 			echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") $EXROUTEDIR/$i not found, skip."  >> $LOG
 			continue
