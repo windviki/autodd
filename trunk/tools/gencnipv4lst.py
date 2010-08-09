@@ -57,7 +57,7 @@ for l in lstlines:
 		(ip, mask) = (list[0], string.split(list[4],"/")[1])
 		#print "route add -net %s netmask %s gw $OLDGW" % (ip, mask)
 		upfile.write("route add -net %s/%s gw $OLDGW\n" % (ip, mask))
-		downfile.write("route del -net %s/%s gw $OLDGW\n" % (ip, mask))
+		downfile.write("route del -net %s/%s\n" % (ip, mask))
 		cnt+=1
 
 print "[INFO] total %i routes generated(%i route(s) added)" % (cnt, cnt-oldcnt)
