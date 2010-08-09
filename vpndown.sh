@@ -58,6 +58,7 @@ esac
 
 echo "[INFO] removing the static routes"
 
+##### begin batch route #####
 route del -net 1.12.0.0 netmask 255.252.0.0
 route del -net 1.24.0.0 netmask 255.248.0.0
 route del -net 110.6.0.0 netmask 255.254.0.0
@@ -1012,6 +1013,8 @@ route del -net 61.128.0.0 netmask 255.192.0.0
 route del -net 61.232.0.0 netmask 255.252.0.0
 route del -net 61.236.0.0 netmask 255.254.0.0
 route del -net 61.240.0.0 netmask 255.252.0.0
+##### end batch route #####
+
 #route del -host $PPTPSRV 
 route del default gw $VPNGW
 echo "$INFO add $OLDGW back as the default gw"

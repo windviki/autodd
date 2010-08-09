@@ -74,6 +74,8 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") add default gw $VPNGW"  >> $LOG
 route add default gw $VPNGW
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take a while." >> $LOG
+
+##### begin batch route #####
 route add -net 1.12.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 1.24.0.0 netmask 255.248.0.0 gw $OLDGW
 route add -net 110.6.0.0 netmask 255.254.0.0 gw $OLDGW
@@ -1028,6 +1030,7 @@ route add -net 61.128.0.0 netmask 255.192.0.0 gw $OLDGW
 route add -net 61.232.0.0 netmask 255.252.0.0 gw $OLDGW
 route add -net 61.236.0.0 netmask 255.254.0.0 gw $OLDGW
 route add -net 61.240.0.0 netmask 255.252.0.0 gw $OLDGW
+##### end batch route #####
 
 
 # prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
