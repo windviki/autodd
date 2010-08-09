@@ -82,9 +82,11 @@ for l in downlines:
 	#if _anchor==1:	print l.rstrip()
 	if _anchor==1:	downfile.write(l)
 	if l.find('end batch route') != -1:
+		_anchor=1
 		#print l.rstrip()
 		downfile.write(l)
 
 upfile.close()
 downfile.close()
 print "[INFO] ALL DONE"
+print "[INFO] remember to chmod +x vpnup.sh vpndown.sh"
