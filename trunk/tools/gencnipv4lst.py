@@ -16,6 +16,16 @@ uplines = urllib.urlopen(up).readlines()
 print "[INFO] fetching the latest vpndown.sh from SVN over http"
 downlines = urllib.urlopen(down).readlines()
 
+# count the current route lines
+for l in range(len(uplines)):
+	if uplines[l].find('begin batch route') != -1:
+		oldcnt_s = l
+	if uplines[l].find('end batch route') != -1:
+		oldcnt_e = l
+oldcnt = oldcnt_e - oldcnt_s - 1
+
+print "[INFO] %i routes exists on the SVN" % oldcnt
+
 #
 # for the vpnup.sh
 #
@@ -50,7 +60,7 @@ for l in lstlines:
 		downfile.write("route del -net %s netmask %s gw $OLDGW\n" % (ip, mask))
 		cnt+=1
 
-print "[INFO] total %i routes generated" % cnt
+print "[INFO] total %i routes generated(%i route(s) added)" % (cnt, cnt-oldcnt)
 
 #
 # for the vpnup.sh
