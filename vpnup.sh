@@ -83,6 +83,7 @@ route add -net 1.48.0.0/15 gw $OLDGW
 route add -net 1.51.0.0/16 gw $OLDGW
 route add -net 1.56.0.0/13 gw $OLDGW
 route add -net 1.68.0.0/14 gw $OLDGW
+route add -net 1.80.0.0/12 gw $OLDGW
 route add -net 1.116.0.0/14 gw $OLDGW
 route add -net 1.180.0.0/14 gw $OLDGW
 route add -net 1.184.0.0/15 gw $OLDGW
@@ -580,6 +581,7 @@ route add -net 125.215.0.0/18 gw $OLDGW
 route add -net 125.216.0.0/13 gw $OLDGW
 route add -net 125.254.128.0/17 gw $OLDGW
 route add -net 134.196.0.0/16 gw $OLDGW
+route add -net 14.103.0.0/16 gw $OLDGW
 route add -net 159.226.0.0/16 gw $OLDGW
 route add -net 161.207.0.0/16 gw $OLDGW
 route add -net 162.105.0.0/16 gw $OLDGW
@@ -978,8 +980,7 @@ route add -net 222.248.0.0/15 gw $OLDGW
 route add -net 223.2.0.0/15 gw $OLDGW
 route add -net 223.4.0.0/14 gw $OLDGW
 route add -net 223.8.0.0/13 gw $OLDGW
-route add -net 223.16.0.0/12 gw $OLDGW
-route add -net 223.32.0.0/11 gw $OLDGW
+route add -net 223.20.0.0/15 gw $OLDGW
 route add -net 223.64.0.0/10 gw $OLDGW
 route add -net 223.128.0.0/15 gw $OLDGW
 route add -net 223.160.0.0/14 gw $OLDGW
@@ -990,9 +991,12 @@ route add -net 223.201.0.0/16 gw $OLDGW
 route add -net 223.202.0.0/15 gw $OLDGW
 route add -net 223.208.0.0/13 gw $OLDGW
 route add -net 223.220.0.0/15 gw $OLDGW
+route add -net 223.223.176.0/20 gw $OLDGW
+route add -net 223.223.192.0/20 gw $OLDGW
 route add -net 223.240.0.0/13 gw $OLDGW
 route add -net 223.248.0.0/14 gw $OLDGW
 route add -net 223.254.0.0/16 gw $OLDGW
+route add -net 223.255.0.0/17 gw $OLDGW
 route add -net 27.8.0.0/13 gw $OLDGW
 route add -net 27.16.0.0/12 gw $OLDGW
 route add -net 27.36.0.0/14 gw $OLDGW
