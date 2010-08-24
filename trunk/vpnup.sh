@@ -39,11 +39,19 @@ OLDGW=$(nvram get wan_gateway)
 
 case $1 in
 	"pptp")
-		VPNSRV=$(nvram get pptpd_client_srvip)
-		VPNSRVSUB=$(nvram get pptpd_client_srvsub)
-		PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
-		VPNGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
-		#VPNGW=$(nvram get pptp_gw)
+		if [ $(nvram get router_name) == 'tomato' ]; then
+			# this is a tomato router
+			VPNSRV=$(nvram get pptpd_client_srvip)
+			VPNSRVSUB=$(nvram get pptpd_client_srvsub)
+			PPTPDEV=$(nvram get pptp_client_iface)
+			VPNGW=$(nvram get pptp_client_gateway)
+		else
+			# ddwrt router
+			VPNSRV=$(nvram get pptpd_client_srvip)
+			VPNSRVSUB=$(nvram get pptpd_client_srvsub)
+			PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
+			VPNGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+		fi
 		;;
 	"openvpn")
 		VPNSRV=$(nvram get openvpncl_remoteip)
