@@ -1,0 +1,5 @@
+# skype login servers
+# ref: http://en.wikipedia.org/wiki/Skype_protocol
+213.146.167.0/24
+193.120.212.0/24
+77.67.32.0/24
