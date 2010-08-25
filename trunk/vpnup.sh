@@ -41,13 +41,15 @@ case $1 in
 	"pptp")
 		case "$(nvram get router_name)" in
 			"tomato")
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") router type: tomato" >> $LOCK
 				VPNSRV=$(nvram get pptpd_client_srvip)
 				VPNSRVSUB=$(nvram get pptpd_client_srvsub)
 				PPTPDEV=$(nvram get pptp_client_iface)
 				VPNGW=$(nvram get pptp_client_gateway)
 				;;
-			"*")
+			*)
 				# assume it to be a DD-WRT
+				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") router type: DD-WRT" >> $LOCK
 				VPNSRV=$(nvram get pptpd_client_srvip)
 				VPNSRVSUB=$(nvram get pptpd_client_srvsub)
 				PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
