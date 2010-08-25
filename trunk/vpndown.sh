@@ -40,8 +40,18 @@ OLDGW=$(nvram get wan_gateway)
 
 case $1 in 
 		"pptp")
-			PPTPSRV=$(nvram get pptpd_client_srvip)
-			VPNGW=$(nvram get pptp_gw)
+			case "$(nvram get router_name)" in
+				"tomato")
+					#VPNSRV=$(nvram get pptpd_client_srvip)
+					#VPNSRVSUB=$(nvram get pptpd_client_srvsub)
+					#PPTPDEV=$(nvram get pptp_client_iface)
+					VPNGW=$(nvram get pptp_client_gateway)
+					;;
+				"DD-WRT")                                                                 
+					PPTPSRV=$(nvram get pptpd_client_srvip)
+					VPNGW=$(nvram get pptp_gw)
+					;;
+			esac
 			;;
 		"openvpn")
 			OPENVPNSRV=$(nvram get openvpncl_remoteip)
