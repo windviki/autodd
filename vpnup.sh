@@ -46,7 +46,8 @@ case $1 in
 				PPTPDEV=$(nvram get pptp_client_iface)
 				VPNGW=$(nvram get pptp_client_gateway)
 				;;
-			"DD-WRT")
+			"*")
+				# assume it to be a DD-WRT
 				VPNSRV=$(nvram get pptpd_client_srvip)
 				VPNSRVSUB=$(nvram get pptpd_client_srvsub)
 				PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
