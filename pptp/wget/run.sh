@@ -23,7 +23,8 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpnup.sh" >> $VPNLOG
 for i in 1 2 3 4 5
 do
 	if [ $(which nc) ]; then
-		echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
+		#echo -e "GET $DLDIR$VPNUP HTTP/1.0\n\n" | $NCCMD > $VPNUP; chmod +x $VPNUP
+		wget $DLDIR$VPNUP && chmod +x $VPNUP && break || echo "$INFO failed, trying again"
 	else
 		wget $DLDIR$VPNUP && chmod +x $VPNUP && break || echo "$INFO failed, trying again"
 	fi
@@ -35,7 +36,8 @@ for i in 1 2 3 4 5
 do
 	echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") getting vpndown.sh" >> $VPNLOG
 	if [ $(which nc) ]; then
-		echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
+		#echo -e "GET $DLDIR$VPNDOWN HTTP/1.0\n\n" | $NCCMD > $VPNDOWN; chmod +x $VPNDOWN
+		wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break || echo "$INFO failed, trying again"
 	else
 		wget $DLDIR$VPNDOWN && chmod +x $VPNDOWN && break || echo "$INFO failed, trying again"
 	fi
