@@ -95,31 +95,23 @@ route add -host 208.67.222.222 gw $VPNGW
 # www.dropbox.com
 route add -host 174.36.30.70 gw $VPNGW
 # login.facebook.com
-route add -net 66.220.147.0/24 gw $VPNGW
-route add -net 66.220.146.0/24 gw $VPNGW
-# www.facebook.com
-route add -net 69.63.189.0/24 gw $VPNGW
-# docs.google.com
-route add -net 74.125.153.0/24 gw $VPNGW
-route add -host 66.102.7.100 gw $VPNGW
-route add -host 66.102.7.101 gw $VPNGW
+#route add -net 66.220.147.0/24 gw $VPNGW
+#route add -net 66.220.146.0/24 gw $VPNGW
+# for all facebook
+route add -net 66.220.0.0/16 gw $VPNGW
 # {www|api}.twitter.com
-route add -net 128.242.245.0/24 gw $VPNGW
-route add -net 128.242.240.0/24 gw $VPNGW
 route add -net 168.143.162.0/24 gw $VPNGW
 route add -net 168.143.171.0/24 gw $VPNGW
-# www.wretch.cc
-route add -host 116.214.13.16 gw $VPNGW
-# www.youtube.com
-route add -net 66.102.7.0/24 gw $VPNGW
-# gdata.youtube.com
-route add -net 72.14.213.0/24 gw $VPNGW
+# tw.rd.yahoo.com
+route add -net 203.84.203.0/24 gw $VPNGW
 # c.youtube.com
-route add -net 74.125.164.0/24 gw $VPNGW
+#route add -net 74.125.164.0/24 gw $VPNGW
 # ytimg.com
-route add -net 74.125.6.0/24 gw $VPNGW
-route add -net 74.125.15.0/24 gw $VPNGW
-route add -net 74.125.19.0/24 gw $VPNGW
+#route add -net 74.125.6.0/24 gw $VPNGW
+#route add -net 74.125.15.0/24 gw $VPNGW
+#route add -net 74.125.19.0/24 gw $VPNGW
+# for all youtube
+route add -net 74.125.0.0/16 gw $VPNGW
 # all others
 route add -host 109.104.79.84 gw $VPNGW
 route add -host 109.239.51.251 gw $VPNGW
