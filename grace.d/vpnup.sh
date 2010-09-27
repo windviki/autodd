@@ -104,6 +104,8 @@ route add -net 168.143.162.0/24 gw $VPNGW
 route add -net 168.143.171.0/24 gw $VPNGW
 # tw.rd.yahoo.com
 route add -net 203.84.203.0/24 gw $VPNGW
+# for all TW Yahoo
+route add -net 116.214.0.0/16 gw $VPNGW
 # c.youtube.com
 #route add -net 74.125.164.0/24 gw $VPNGW
 # ytimg.com
