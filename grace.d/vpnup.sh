@@ -120,6 +120,8 @@ route add -net 74.125.164.0/24 gw $VPNGW
 route add -net 74.125.6.0/24 gw $VPNGW
 route add -net 74.125.15.0/24 gw $VPNGW
 route add -net 74.125.19.0/24 gw $VPNGW
+# all others
+
 ##### end batch route #####
 
 
