@@ -99,6 +99,7 @@ route add -host 174.36.30.70 gw $VPNGW
 #route add -net 66.220.146.0/24 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
+route add -net 69.63.0.0/16 gw $VPNGW
 # {www|api}.twitter.com
 route add -net 168.143.162.0/24 gw $VPNGW
 route add -net 168.143.171.0/24 gw $VPNGW
