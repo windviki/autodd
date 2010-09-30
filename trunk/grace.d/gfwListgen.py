@@ -3,7 +3,7 @@
 import urllib
 import base64
 import string
-from socket import gethostbyname
+#from socket import gethostbyname
 import dns.resolver
 import re
 
@@ -88,11 +88,11 @@ gfwdn.close()
 iplist = list(set(ip))
 iplist.sort()
 #print ip
-ipfd = open("ip-list","wa")
-for i in iplist:
-	print i
-	ipfd.write(i+"\n")
-ipfd.close()
+#ipfd = open("ip-list","wa")
+#for i in iplist:
+	#print i
+	#ipfd.write(i+"\n")
+#ipfd.close()
 	
 
 
