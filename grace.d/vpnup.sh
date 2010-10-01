@@ -123,8 +123,8 @@ route add -net 208.117.224.0/19 gw $VPNGW
 route add -net 210.242.17.0/24 gw $VPNGW
 route add -net 210.242.18.0/24 gw $VPNGW
 # www.books.com.tw
-route add -host 61.31.206.33 gw $VPNGW
-route add -host 58.86.40.33 gw $VPNGW
+route add -net 61.31.206.0/24 gw $VPNGW
+route add -net 58.86.40.0/24 gw $VPNGW
 # all others
 route add -host 109.104.79.84 gw $VPNGW
 route add -host 109.239.51.251 gw $VPNGW
