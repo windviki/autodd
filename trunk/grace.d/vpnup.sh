@@ -97,6 +97,9 @@ route add -host 174.36.30.70 gw $VPNGW
 # login.facebook.com
 #route add -net 66.220.147.0/24 gw $VPNGW
 #route add -net 66.220.146.0/24 gw $VPNGW
+# for Google
+route add -net 72.14.192.0/18 gw $VPNGW
+route add -net 74.125.0.0/16 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
