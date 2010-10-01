@@ -117,6 +117,8 @@ route add -net 116.214.0.0/16 gw $VPNGW
 #route add -net 74.125.19.0/24 gw $VPNGW
 # for all youtube
 route add -net 74.125.0.0/16 gw $VPNGW
+route add -net 173.194.0.0/16 gw $VPNGW
+route add -net 208.117.224.0/19 gw $VPNGW
 # for all xuite
 route add -net 210.242.17.0/24 gw $VPNGW
 route add -net 210.242.18.0/24 gw $VPNGW
