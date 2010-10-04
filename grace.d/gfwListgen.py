@@ -28,7 +28,10 @@ def getip(hostname=''):
 		print hostname + " is IP address"
 		_ip.append(hostname)
 		return
-	answers = dns.resolver.query(hostname, 'A')
+	r = dns.resolver.get_default_resolver()
+	r.nameservers=['8.8.8.8']
+	#answers = dns.resolver.query(hostname, 'A')
+	answers = r.query(hostname, 'A')
 	for rdata in answers:
 		print rdata.address
 		_ip.append(rdata.address)
