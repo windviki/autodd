@@ -992,8 +992,10 @@ if [ $(nvram get exroute_enable) -eq 1 ]; then
 			# check the item is a subnet or a single ip address
 			echo $r | grep "/" > /dev/null
 			if [ $? -eq 0 ]; then
+				route del -net $r
 				route add -net $r gw $OLDGW
 			else
+				route del $r
 				route add $r gw $OLDGW
 			fi
 		done 
