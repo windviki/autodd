@@ -54,6 +54,7 @@ case $1 in
 				VPNSRVSUB=$(nvram get pptpd_client_srvsub)
 				PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
 				VPNGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+				VPNUPCUSTOM='/jffs/pptp/vpnup_custom' 
 				;;
 		esac
 		;;
@@ -63,6 +64,7 @@ case $1 in
 		#OPENVPNDEV=$(route | grep ^$OPENVPNSRVSUB | awk '{print $NF}')
 		OPENVPNDEV='tun0'
 		VPNGW=$(ifconfig $OPENVPNDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
+		VPNUPCUSTOM='/jffs/openvpn/vpnup_custom'
 		;;
 	*)
 		echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") unknown vpnup.sh parameter,quit." >> $LOCK
@@ -84,6 +86,11 @@ fi
 
 #echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") add default gw $VPNGW"  >> $LOG
 #route add default gw $VPNGW
+
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") loading vpnup_custom if available" >> $LOG
+export VPNGW=$VPNGW
+export OLDGW=$OLDGW
+grep ^route $VPNUPCUSTOM  | /bin/sh -x
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take a while." >> $LOG
 
