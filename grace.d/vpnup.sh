@@ -107,6 +107,8 @@ route add -host 174.36.30.70 gw $VPNGW
 # for Google
 route add -net 72.14.192.0/18 gw $VPNGW
 route add -net 74.125.0.0/16 gw $VPNGW
+# static.cache.l.google.com in Taiwan
+route add -host 60.199.175.24 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
