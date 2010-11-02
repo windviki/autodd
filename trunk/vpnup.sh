@@ -78,6 +78,7 @@ else
 	echo "$INFO OLDGW is $OLDGW" 
 fi
 
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") make $VPNSRV gw $OLDGW"  >> $LOG
 route add -host $VPNSRV gw $OLDGW
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") delete default gw $OLDGW"  >> $LOG
 route del default gw $OLDGW
