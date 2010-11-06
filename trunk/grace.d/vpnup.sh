@@ -112,6 +112,8 @@ route add -net 60.199.175.0/24 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
+# fbcdn
+route add -net 96.17.8.0/24 gw $VPNGW
 # imgN.imageshack.us
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
@@ -140,6 +142,16 @@ route add -net 116.214.0.0/16 gw $VPNGW
 # for all youtube
 route add -net 66.102.0.0/20 gw $VPNGW
 route add -net 72.14.213.0/24 gw $VPNGW
+# for vimeo
+# av.vimeo.com
+route add -net 117.104.138.0/24 gw $VPNGW
+route add -net 24.143.203.0/24 gw $VPNGW
+route add -net 198.173.160.0/24 gw $VPNGW
+route add -net 198.173.161.0/24 gw $VPNGW
+# assets.vimeo.com
+route add -net 124.40.51.0/24 gw $VPNGW
+# *.vimeo.com
+route add -net 66.235.126.0/24 gw $VPNGW
 #route add -net 74.125.0.0/16 gw $VPNGW
 route add -net 173.194.0.0/16 gw $VPNGW
 route add -net 208.117.224.0/19 gw $VPNGW
