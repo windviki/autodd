@@ -101,6 +101,8 @@ route add -host 8.8.4.4 gw $VPNGW
 route add -host 208.67.222.222 gw $VPNGW
 # www.dropbox.com
 route add -host 174.36.30.70 gw $VPNGW
+# wiki.dropbox.com
+route add -host 174.36.51.41 gw $VPNGW
 # login.facebook.com
 #route add -net 66.220.147.0/24 gw $VPNGW
 #route add -net 66.220.146.0/24 gw $VPNGW
@@ -133,6 +135,8 @@ route add -net 203.84.203.0/24 gw $VPNGW
 route add -net 203.84.202.0/24 gw $VPNGW
 # for all TW Yahoo
 route add -net 116.214.0.0/16 gw $VPNGW
+# yam.com
+route add -net 60.199.252.0/24 gw $VPNGW
 # c.youtube.com
 #route add -net 74.125.164.0/24 gw $VPNGW
 # ytimg.com
