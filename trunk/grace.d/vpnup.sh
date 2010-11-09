@@ -135,6 +135,8 @@ route add -net 203.84.203.0/24 gw $VPNGW
 route add -net 203.84.202.0/24 gw $VPNGW
 # for all TW Yahoo
 route add -net 116.214.0.0/16 gw $VPNGW
+# upload.wikimedia.org
+route add -host 208.80.152.3 gw $VPNGW
 # yam.com
 route add -net 60.199.252.0/24 gw $VPNGW
 # c.youtube.com
