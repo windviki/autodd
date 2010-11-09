@@ -72,8 +72,7 @@ echo "[INFO] removing the static routes"
 route del -net 1.12.0.0/14
 route del -net 1.24.0.0/13
 route del -net 1.45.0.0/16
-route del -net 1.48.0.0/15
-route del -net 1.51.0.0/16
+route del -net 1.48.0.0/14
 route del -net 1.56.0.0/13
 route del -net 1.68.0.0/14
 route del -net 1.80.0.0/12
@@ -574,7 +573,18 @@ route del -net 125.215.0.0/18
 route del -net 125.216.0.0/13
 route del -net 125.254.128.0/17
 route del -net 134.196.0.0/16
+route del -net 14.16.0.0/12
+route del -net 14.102.156.0/22
 route del -net 14.103.0.0/16
+route del -net 14.104.0.0/13
+route del -net 14.112.0.0/12
+route del -net 14.130.0.0/15
+route del -net 14.134.0.0/15
+route del -net 14.144.0.0/12
+route del -net 14.192.60.0/22
+route del -net 14.196.0.0/15
+route del -net 14.204.0.0/15
+route del -net 14.208.0.0/12
 route del -net 159.226.0.0/16
 route del -net 161.207.0.0/16
 route del -net 162.105.0.0/16
@@ -713,6 +723,7 @@ route del -net 202.43.76.0/22
 route del -net 202.43.144.0/20
 route del -net 202.46.32.0/19
 route del -net 202.46.224.0/20
+route del -net 202.59.232.0/23
 route del -net 202.60.112.0/20
 route del -net 202.63.248.0/22
 route del -net 202.69.4.0/22
@@ -829,6 +840,7 @@ route del -net 203.118.248.0/22
 route del -net 203.119.24.0/21
 route del -net 203.119.32.0/22
 route del -net 203.119.80.0/22
+route del -net 203.119.85.0/24
 route del -net 203.128.32.0/19
 route del -net 203.128.96.0/19
 route del -net 203.128.128.0/19
@@ -974,8 +986,10 @@ route del -net 223.2.0.0/15
 route del -net 223.4.0.0/14
 route del -net 223.8.0.0/13
 route del -net 223.20.0.0/15
+route del -net 223.27.184.0/22
 route del -net 223.64.0.0/10
 route del -net 223.128.0.0/15
+route del -net 223.144.0.0/12
 route del -net 223.160.0.0/14
 route del -net 223.166.0.0/15
 route del -net 223.192.0.0/15
@@ -1014,6 +1028,11 @@ route del -net 27.152.0.0/13
 route del -net 27.184.0.0/13
 route del -net 27.192.0.0/11
 route del -net 27.224.0.0/14
+route del -net 49.4.0.0/14
+route del -net 49.52.0.0/14
+route del -net 49.112.0.0/13
+route del -net 49.120.0.0/14
+route del -net 49.140.0.0/15
 route del -net 58.14.0.0/15
 route del -net 58.16.0.0/13
 route del -net 58.24.0.0/15
