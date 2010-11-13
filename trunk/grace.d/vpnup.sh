@@ -121,6 +121,8 @@ route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
 route add -net 38.99.77.0/24 gw $VPNGW  
 route add -net 38.99.76.0/24 gw $VPNGW  
+#tumblr.com
+route add -host 174.120.238.130 gw $VPNGW
 # tw.nextmedia.com
 route add -host 210.242.234.140 gw $VPNGW
 # {www|api}.twitter.com
@@ -183,7 +185,6 @@ route add -host 114.80.210.217 gw $VPNGW
 route add -host 116.214.13.16 gw $VPNGW
 route add -host 118.142.13.39 gw $VPNGW
 route add -host 118.142.27.186 gw $VPNGW
-route add -host 118.142.39.198 gw $VPNGW
 route add -host 118.142.53.179 gw $VPNGW
 route add -host 118.144.83.112 gw $VPNGW
 route add -host 118.173.204.2 gw $VPNGW
@@ -204,15 +205,14 @@ route add -host 124.244.150.251 gw $VPNGW
 route add -host 125.29.60.4 gw $VPNGW
 route add -host 127.0.0.1 gw $VPNGW
 route add -host 128.100.171.12 gw $VPNGW
-route add -host 128.242.240.116 gw $VPNGW
 route add -host 14.136.32.79 gw $VPNGW
+route add -host 14.136.65.137 gw $VPNGW
 route add -host 140.109.29.253 gw $VPNGW
 route add -host 140.113.121.211 gw $VPNGW
 route add -host 140.130.111.209 gw $VPNGW
 route add -host 146.82.200.125 gw $VPNGW
 route add -host 163.29.3.40 gw $VPNGW
 route add -host 168.143.113.10 gw $VPNGW
-route add -host 168.143.162.52 gw $VPNGW
 route add -host 169.207.67.17 gw $VPNGW
 route add -host 170.140.52.142 gw $VPNGW
 route add -host 170.140.53.44 gw $VPNGW
@@ -220,7 +220,6 @@ route add -host 173.13.167.171 gw $VPNGW
 route add -host 173.192.129.139 gw $VPNGW
 route add -host 173.201.141.91 gw $VPNGW
 route add -host 173.201.149.208 gw $VPNGW
-route add -host 173.201.216.46 gw $VPNGW
 route add -host 173.201.253.37 gw $VPNGW
 route add -host 173.201.37.86 gw $VPNGW
 route add -host 173.201.78.203 gw $VPNGW
@@ -231,8 +230,7 @@ route add -host 173.205.125.108 gw $VPNGW
 route add -host 173.208.164.222 gw $VPNGW
 route add -host 173.212.249.205 gw $VPNGW
 route add -host 173.224.209.173 gw $VPNGW
-route add -host 173.224.213.32 gw $VPNGW
-route add -host 173.224.215.229 gw $VPNGW
+route add -host 173.224.213.31 gw $VPNGW
 route add -host 173.224.216.175 gw $VPNGW
 route add -host 173.230.151.37 gw $VPNGW
 route add -host 173.230.152.30 gw $VPNGW
@@ -278,11 +276,12 @@ route add -host 174.142.114.102 gw $VPNGW
 route add -host 174.143.157.148 gw $VPNGW
 route add -host 174.143.243.139 gw $VPNGW
 route add -host 174.143.45.104 gw $VPNGW
-route add -host 174.35.52.131 gw $VPNGW
+route add -host 174.35.52.138 gw $VPNGW
 route add -host 174.36.125.82 gw $VPNGW
 route add -host 174.36.186.208 gw $VPNGW
 route add -host 174.36.196.242 gw $VPNGW
 route add -host 174.36.228.137 gw $VPNGW
+route add -host 174.36.3.42 gw $VPNGW
 route add -host 174.37.129.192 gw $VPNGW
 route add -host 174.37.172.68 gw $VPNGW
 route add -host 178.162.191.20 gw $VPNGW
@@ -320,12 +319,12 @@ route add -host 202.108.39.83 gw $VPNGW
 route add -host 202.123.82.23 gw $VPNGW
 route add -host 202.130.88.26 gw $VPNGW
 route add -host 202.172.28.100 gw $VPNGW
+route add -host 202.177.15.84 gw $VPNGW
 route add -host 202.177.27.210 gw $VPNGW
 route add -host 202.177.28.164 gw $VPNGW
 route add -host 202.181.187.51 gw $VPNGW
 route add -host 202.181.207.207 gw $VPNGW
 route add -host 202.181.238.98 gw $VPNGW
-route add -host 202.181.242.75 gw $VPNGW
 route add -host 202.181.99.87 gw $VPNGW
 route add -host 202.190.75.151 gw $VPNGW
 route add -host 202.27.28.10 gw $VPNGW
@@ -353,18 +352,17 @@ route add -host 204.145.120.172 gw $VPNGW
 route add -host 204.152.194.52 gw $VPNGW
 route add -host 204.152.198.140 gw $VPNGW
 route add -host 204.16.252.112 gw $VPNGW
-route add -host 204.160.104.126 gw $VPNGW
 route add -host 204.232.142.118 gw $VPNGW
 route add -host 204.27.60.19 gw $VPNGW
-route add -host 204.45.29.203 gw $VPNGW
 route add -host 204.74.211.42 gw $VPNGW
 route add -host 204.74.214.205 gw $VPNGW
 route add -host 204.74.222.76 gw $VPNGW
 route add -host 204.9.177.195 gw $VPNGW
 route add -host 204.93.175.51 gw $VPNGW
+route add -host 205.188.101.11 gw $VPNGW
 route add -host 205.196.221.62 gw $VPNGW
+route add -host 205.209.175.94 gw $VPNGW
 route add -host 205.214.86.20 gw $VPNGW
-route add -host 206.188.193.76 gw $VPNGW
 route add -host 206.190.60.37 gw $VPNGW
 route add -host 206.217.207.202 gw $VPNGW
 route add -host 206.217.221.95 gw $VPNGW
@@ -391,7 +389,6 @@ route add -host 208.53.147.143 gw $VPNGW
 route add -host 208.65.130.26 gw $VPNGW
 route add -host 208.66.67.30 gw $VPNGW
 route add -host 208.69.4.141 gw $VPNGW
-route add -host 208.69.40.100 gw $VPNGW
 route add -host 208.71.106.124 gw $VPNGW
 route add -host 208.71.112.30 gw $VPNGW
 route add -host 208.72.2.186 gw $VPNGW
@@ -402,7 +399,7 @@ route add -host 208.80.152.2 gw $VPNGW
 route add -host 208.80.56.11 gw $VPNGW
 route add -host 208.88.182.181 gw $VPNGW
 route add -host 208.92.218.173 gw $VPNGW
-route add -host 208.94.2.98 gw $VPNGW
+route add -host 208.94.241.210 gw $VPNGW
 route add -host 209.11.132.22 gw $VPNGW
 route add -host 209.160.20.56 gw $VPNGW
 route add -host 209.17.74.13 gw $VPNGW
@@ -418,10 +415,10 @@ route add -host 209.25.137.150 gw $VPNGW
 route add -host 209.40.194.248 gw $VPNGW
 route add -host 209.51.161.182 gw $VPNGW
 route add -host 209.51.163.53 gw $VPNGW
+route add -host 209.51.181.26 gw $VPNGW
 route add -host 209.51.191.253 gw $VPNGW
 route add -host 209.51.196.250 gw $VPNGW
 route add -host 209.62.106.115 gw $VPNGW
-route add -host 209.62.20.200 gw $VPNGW
 route add -host 209.62.69.106 gw $VPNGW
 route add -host 209.68.35.19 gw $VPNGW
 route add -host 209.8.254.21 gw $VPNGW
@@ -445,7 +442,7 @@ route add -host 212.239.17.82 gw $VPNGW
 route add -host 212.27.48.10 gw $VPNGW
 route add -host 212.44.106.49 gw $VPNGW
 route add -host 212.58.224.138 gw $VPNGW
-route add -host 212.58.246.91 gw $VPNGW
+route add -host 212.58.244.66 gw $VPNGW
 route add -host 212.58.254.252 gw $VPNGW
 route add -host 212.64.146.224 gw $VPNGW
 route add -host 213.139.108.166 gw $VPNGW
@@ -482,9 +479,9 @@ route add -host 216.67.225.90 gw $VPNGW
 route add -host 216.74.34.10 gw $VPNGW
 route add -host 216.75.58.102 gw $VPNGW
 route add -host 216.83.51.105 gw $VPNGW
-route add -host 217.118.27.254 gw $VPNGW
 route add -host 217.16.1.150 gw $VPNGW
 route add -host 217.70.184.38 gw $VPNGW
+route add -host 218.103.120.179 gw $VPNGW
 route add -host 218.188.30.99 gw $VPNGW
 route add -host 218.188.80.138 gw $VPNGW
 route add -host 218.189.190.3 gw $VPNGW
@@ -493,6 +490,7 @@ route add -host 218.213.194.253 gw $VPNGW
 route add -host 218.213.247.21 gw $VPNGW
 route add -host 218.213.85.33 gw $VPNGW
 route add -host 218.240.40.222 gw $VPNGW
+route add -host 218.32.87.210 gw $VPNGW
 route add -host 218.83.155.161 gw $VPNGW
 route add -host 219.85.64.200 gw $VPNGW
 route add -host 219.85.68.66 gw $VPNGW
@@ -506,8 +504,6 @@ route add -host 38.108.124.236 gw $VPNGW
 route add -host 38.118.195.244 gw $VPNGW
 route add -host 38.118.199.119 gw $VPNGW
 route add -host 38.119.130.61 gw $VPNGW
-route add -host 38.99.106.19 gw $VPNGW
-route add -host 38.99.68.181 gw $VPNGW
 route add -host 4.23.40.126 gw $VPNGW
 route add -host 46.20.47.43 gw $VPNGW
 route add -host 46.51.186.222 gw $VPNGW
@@ -545,7 +541,6 @@ route add -host 62.50.44.98 gw $VPNGW
 route add -host 62.75.145.182 gw $VPNGW
 route add -host 63.216.198.111 gw $VPNGW
 route add -host 63.231.199.143 gw $VPNGW
-route add -host 64.12.89.139 gw $VPNGW
 route add -host 64.120.176.194 gw $VPNGW
 route add -host 64.14.48.143 gw $VPNGW
 route add -host 64.147.115.80 gw $VPNGW
@@ -568,7 +563,6 @@ route add -host 64.62.243.106 gw $VPNGW
 route add -host 64.69.32.91 gw $VPNGW
 route add -host 64.71.141.252 gw $VPNGW
 route add -host 64.71.164.56 gw $VPNGW
-route add -host 64.71.33.150 gw $VPNGW
 route add -host 64.71.34.21 gw $VPNGW
 route add -host 64.78.167.62 gw $VPNGW
 route add -host 64.78.169.187 gw $VPNGW
@@ -580,13 +574,14 @@ route add -host 64.94.234.144 gw $VPNGW
 route add -host 65.182.101.84 gw $VPNGW
 route add -host 65.23.158.6 gw $VPNGW
 route add -host 65.254.231.126 gw $VPNGW
-route add -host 65.39.205.54 gw $VPNGW
+route add -host 65.39.205.53 gw $VPNGW
 route add -host 65.49.14.30 gw $VPNGW
+route add -host 65.49.26.35 gw $VPNGW
 route add -host 65.49.68.20 gw $VPNGW
 route add -host 65.55.114.220 gw $VPNGW
 route add -host 65.55.124.220 gw $VPNGW
 route add -host 65.60.9.34 gw $VPNGW
-route add -host 66.114.53.38 gw $VPNGW
+route add -host 66.114.53.34 gw $VPNGW
 route add -host 66.115.130.53 gw $VPNGW
 route add -host 66.119.43.30 gw $VPNGW
 route add -host 66.147.244.193 gw $VPNGW
@@ -596,7 +591,6 @@ route add -host 66.151.110.206 gw $VPNGW
 route add -host 66.159.230.113 gw $VPNGW
 route add -host 66.160.183.121 gw $VPNGW
 route add -host 66.163.168.216 gw $VPNGW
-route add -host 66.220.149.32 gw $VPNGW
 route add -host 66.220.29.79 gw $VPNGW
 route add -host 66.235.112.64 gw $VPNGW
 route add -host 66.235.126.128 gw $VPNGW
@@ -620,7 +614,6 @@ route add -host 67.159.60.57 gw $VPNGW
 route add -host 67.18.168.242 gw $VPNGW
 route add -host 67.18.91.26 gw $VPNGW
 route add -host 67.19.136.218 gw $VPNGW
-route add -host 67.192.251.140 gw $VPNGW
 route add -host 67.192.97.104 gw $VPNGW
 route add -host 67.20.99.163 gw $VPNGW
 route add -host 67.201.54.151 gw $VPNGW
@@ -632,10 +625,13 @@ route add -host 67.205.62.127 gw $VPNGW
 route add -host 67.205.93.146 gw $VPNGW
 route add -host 67.207.140.210 gw $VPNGW
 route add -host 67.208.116.200 gw $VPNGW
+route add -host 67.214.208.165 gw $VPNGW
 route add -host 67.220.91.30 gw $VPNGW
 route add -host 67.221.166.20 gw $VPNGW
+route add -host 67.221.167.121 gw $VPNGW
 route add -host 67.221.180.135 gw $VPNGW
 route add -host 67.225.196.90 gw $VPNGW
+route add -host 67.227.181.208 gw $VPNGW
 route add -host 67.228.10.80 gw $VPNGW
 route add -host 67.228.196.243 gw $VPNGW
 route add -host 67.228.224.19 gw $VPNGW
@@ -645,7 +641,6 @@ route add -host 67.23.1.237 gw $VPNGW
 route add -host 68.142.213.151 gw $VPNGW
 route add -host 68.142.214.24 gw $VPNGW
 route add -host 68.178.232.99 gw $VPNGW
-route add -host 68.178.254.170 gw $VPNGW
 route add -host 68.180.206.184 gw $VPNGW
 route add -host 68.71.38.118 gw $VPNGW
 route add -host 69.10.32.154 gw $VPNGW
@@ -674,7 +669,6 @@ route add -host 69.163.242.152 gw $VPNGW
 route add -host 69.164.197.228 gw $VPNGW
 route add -host 69.172.200.27 gw $VPNGW
 route add -host 69.175.94.114 gw $VPNGW
-route add -host 69.197.153.220 gw $VPNGW
 route add -host 69.20.11.136 gw $VPNGW
 route add -host 69.26.170.8 gw $VPNGW
 route add -host 69.28.65.65 gw $VPNGW
@@ -699,6 +693,7 @@ route add -host 69.73.184.208 gw $VPNGW
 route add -host 69.90.160.35 gw $VPNGW
 route add -host 69.90.74.20 gw $VPNGW
 route add -host 69.93.107.113 gw $VPNGW
+route add -host 69.93.115.144 gw $VPNGW
 route add -host 69.93.124.162 gw $VPNGW
 route add -host 69.93.206.250 gw $VPNGW
 route add -host 70.32.107.173 gw $VPNGW
@@ -748,6 +743,7 @@ route add -host 74.125.67.100 gw $VPNGW
 route add -host 74.125.95.93 gw $VPNGW
 route add -host 74.200.243.251 gw $VPNGW
 route add -host 74.200.244.59 gw $VPNGW
+route add -host 74.205.123.230 gw $VPNGW
 route add -host 74.205.65.180 gw $VPNGW
 route add -host 74.207.244.105 gw $VPNGW
 route add -host 74.207.250.219 gw $VPNGW
@@ -781,7 +777,6 @@ route add -host 74.55.98.186 gw $VPNGW
 route add -host 74.82.1.253 gw $VPNGW
 route add -host 74.82.162.2 gw $VPNGW
 route add -host 74.82.173.199 gw $VPNGW
-route add -host 74.84.138.74 gw $VPNGW
 route add -host 74.86.132.192 gw $VPNGW
 route add -host 74.86.142.3 gw $VPNGW
 route add -host 74.86.183.204 gw $VPNGW
@@ -798,7 +793,6 @@ route add -host 75.119.209.96 gw $VPNGW
 route add -host 75.119.219.103 gw $VPNGW
 route add -host 75.125.121.99 gw $VPNGW
 route add -host 75.125.177.58 gw $VPNGW
-route add -host 75.125.192.58 gw $VPNGW
 route add -host 75.126.137.161 gw $VPNGW
 route add -host 75.126.182.36 gw $VPNGW
 route add -host 75.126.244.113 gw $VPNGW
@@ -806,11 +800,11 @@ route add -host 76.12.10.110 gw $VPNGW
 route add -host 76.125.244.150 gw $VPNGW
 route add -host 76.73.18.92 gw $VPNGW
 route add -host 76.73.40.250 gw $VPNGW
+route add -host 76.73.67.28 gw $VPNGW
 route add -host 77.247.178.32 gw $VPNGW
 route add -host 77.247.179.176 gw $VPNGW
 route add -host 77.87.179.116 gw $VPNGW
 route add -host 78.46.39.209 gw $VPNGW
-route add -host 8.12.222.126 gw $VPNGW
 route add -host 8.17.172.71 gw $VPNGW
 route add -host 8.6.19.68 gw $VPNGW
 route add -host 80.67.162.8 gw $VPNGW
@@ -833,6 +827,7 @@ route add -host 85.233.202.178 gw $VPNGW
 route add -host 86.59.30.36 gw $VPNGW
 route add -host 87.106.116.167 gw $VPNGW
 route add -host 87.106.148.28 gw $VPNGW
+route add -host 87.106.21.38 gw $VPNGW
 route add -host 87.230.90.132 gw $VPNGW
 route add -host 88.151.243.8 gw $VPNGW
 route add -host 88.86.118.148 gw $VPNGW
@@ -848,16 +843,17 @@ route add -host 92.61.153.229 gw $VPNGW
 route add -host 94.136.55.26 gw $VPNGW
 route add -host 94.75.247.165 gw $VPNGW
 route add -host 94.76.239.85 gw $VPNGW
-route add -host 95.101.245.50 gw $VPNGW
 route add -host 95.211.112.220 gw $VPNGW
 route add -host 95.211.9.39 gw $VPNGW
 route add -host 96.0.105.82 gw $VPNGW
+route add -host 96.16.69.50 gw $VPNGW
 route add -host 96.46.7.187 gw $VPNGW
 route add -host 96.56.10.219 gw $VPNGW
 route add -host 96.9.134.26 gw $VPNGW
 route add -host 97.74.19.135 gw $VPNGW
 route add -host 97.74.204.213 gw $VPNGW
 route add -host 97.74.82.184 gw $VPNGW
+route add -host 98.124.198.1 gw $VPNGW
 route add -host 98.124.199.1 gw $VPNGW
 route add -host 98.126.132.155 gw $VPNGW
 route add -host 98.126.44.253 gw $VPNGW
@@ -878,6 +874,7 @@ route add -host 99.192.139.241 gw $VPNGW
 route add -net 111.92.236.0/24 gw $VPNGW
 route add -net 123.242.230.0/24 gw $VPNGW
 route add -net 128.241.116.0/24 gw $VPNGW
+route add -net 128.242.240.0/24 gw $VPNGW
 route add -net 128.242.245.0/24 gw $VPNGW
 route add -net 130.242.18.0/24 gw $VPNGW
 route add -net 137.227.232.0/24 gw $VPNGW
@@ -890,6 +887,7 @@ route add -net 149.48.228.0/24 gw $VPNGW
 route add -net 152.46.7.0/24 gw $VPNGW
 route add -net 152.61.128.0/24 gw $VPNGW
 route add -net 173.192.60.0/24 gw $VPNGW
+route add -net 173.201.216.0/24 gw $VPNGW
 route add -net 173.227.66.0/24 gw $VPNGW
 route add -net 174.140.154.0/24 gw $VPNGW
 route add -net 174.36.20.0/24 gw $VPNGW
@@ -898,11 +896,11 @@ route add -net 174.36.58.0/24 gw $VPNGW
 route add -net 178.63.94.0/24 gw $VPNGW
 route add -net 184.72.253.0/24 gw $VPNGW
 route add -net 188.65.120.0/24 gw $VPNGW
-route add -net 202.177.15.0/24 gw $VPNGW
 route add -net 202.181.198.0/24 gw $VPNGW
 route add -net 202.39.235.0/24 gw $VPNGW
 route add -net 202.60.254.0/24 gw $VPNGW
 route add -net 203.194.200.0/24 gw $VPNGW
+route add -net 203.69.66.0/24 gw $VPNGW
 route add -net 203.77.186.0/24 gw $VPNGW
 route add -net 204.152.214.0/24 gw $VPNGW
 route add -net 204.244.166.0/24 gw $VPNGW
@@ -919,17 +917,16 @@ route add -net 207.66.182.0/24 gw $VPNGW
 route add -net 208.109.138.0/24 gw $VPNGW
 route add -net 208.43.60.0/24 gw $VPNGW
 route add -net 208.68.18.0/24 gw $VPNGW
+route add -net 208.69.40.0/24 gw $VPNGW
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.78.68.0/24 gw $VPNGW
 route add -net 208.80.184.0/24 gw $VPNGW
 route add -net 208.88.180.0/24 gw $VPNGW
 route add -net 208.94.1.0/24 gw $VPNGW
-route add -net 208.94.241.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW
 route add -net 208.96.32.0/24 gw $VPNGW
 route add -net 209.133.27.0/24 gw $VPNGW
 route add -net 209.246.126.0/24 gw $VPNGW
-route add -net 209.51.181.0/24 gw $VPNGW
 route add -net 209.62.55.0/24 gw $VPNGW
 route add -net 209.85.30.0/24 gw $VPNGW
 route add -net 210.17.183.0/24 gw $VPNGW
@@ -950,13 +947,13 @@ route add -net 219.96.104.0/24 gw $VPNGW
 route add -net 220.228.147.0/24 gw $VPNGW
 route add -net 38.101.236.0/24 gw $VPNGW
 route add -net 38.229.70.0/24 gw $VPNGW
+route add -net 38.99.68.0/24 gw $VPNGW
 route add -net 38.99.76.0/24 gw $VPNGW
 route add -net 38.99.77.0/24 gw $VPNGW
 route add -net 58.177.149.0/24 gw $VPNGW
 route add -net 59.188.18.0/24 gw $VPNGW
 route add -net 60.199.245.0/24 gw $VPNGW
 route add -net 60.199.247.0/24 gw $VPNGW
-route add -net 60.254.140.0/24 gw $VPNGW
 route add -net 60.254.185.0/24 gw $VPNGW
 route add -net 61.111.250.0/24 gw $VPNGW
 route add -net 61.31.212.0/24 gw $VPNGW
@@ -969,6 +966,7 @@ route add -net 64.182.119.0/24 gw $VPNGW
 route add -net 64.237.33.0/24 gw $VPNGW
 route add -net 64.237.47.0/24 gw $VPNGW
 route add -net 64.4.37.0/24 gw $VPNGW
+route add -net 64.71.33.0/24 gw $VPNGW
 route add -net 64.74.223.0/24 gw $VPNGW
 route add -net 64.78.165.0/24 gw $VPNGW
 route add -net 65.49.2.0/24 gw $VPNGW
@@ -979,6 +977,7 @@ route add -net 66.96.130.0/24 gw $VPNGW
 route add -net 66.96.131.0/24 gw $VPNGW
 route add -net 66.96.216.0/24 gw $VPNGW
 route add -net 67.23.129.0/24 gw $VPNGW
+route add -net 68.178.254.0/24 gw $VPNGW
 route add -net 68.233.230.0/24 gw $VPNGW
 route add -net 69.163.141.0/24 gw $VPNGW
 route add -net 69.163.142.0/24 gw $VPNGW
@@ -1008,17 +1007,14 @@ route add -net 74.206.187.0/24 gw $VPNGW
 route add -net 74.208.149.0/24 gw $VPNGW
 route add -net 74.220.207.0/24 gw $VPNGW
 route add -net 74.220.215.0/24 gw $VPNGW
-route add -net 74.53.4.0/24 gw $VPNGW
 route add -net 74.82.53.0/24 gw $VPNGW
 route add -net 74.86.123.0/24 gw $VPNGW
 route add -net 74.86.194.0/24 gw $VPNGW
 route add -net 75.125.252.0/24 gw $VPNGW
 route add -net 75.126.148.0/24 gw $VPNGW
-route add -net 76.73.45.0/24 gw $VPNGW
 route add -net 76.74.159.0/24 gw $VPNGW
 route add -net 76.74.254.0/24 gw $VPNGW
 route add -net 8.5.1.0/24 gw $VPNGW
-route add -net 81.52.250.0/24 gw $VPNGW
 route add -net 82.98.86.0/24 gw $VPNGW
 route add -net 84.20.192.0/24 gw $VPNGW
 route add -net 85.17.172.0/24 gw $VPNGW
