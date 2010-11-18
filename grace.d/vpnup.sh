@@ -117,12 +117,12 @@ route add -net 69.63.0.0/16 gw $VPNGW
 # fbcdn
 route add -net 96.17.8.0/24 gw $VPNGW
 # imgN.imageshack.us
-# statics.plurk.com
-route add -net 216.137.55.0/24 gw $VPNGW
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
 route add -net 38.99.77.0/24 gw $VPNGW  
 route add -net 38.99.76.0/24 gw $VPNGW  
+# statics.plurk.com
+route add -net 216.137.53.0/24 gw $VPNGW
 #tumblr.com
 route add -host 174.120.238.130 gw $VPNGW
 # tw.nextmedia.com
