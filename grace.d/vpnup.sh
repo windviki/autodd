@@ -131,6 +131,7 @@ route add -host 174.120.238.130 gw $VPNGW
 # tw.nextmedia.com
 route add -host 210.242.234.140 gw $VPNGW
 # {www|api}.twitter.com
+route add -net 168.143.161.0/24 gw $VPNGW
 route add -net 168.143.162.0/24 gw $VPNGW
 route add -net 168.143.171.0/24 gw $VPNGW
 route add -net 128.242.240.0/24 gw $VPNGW
