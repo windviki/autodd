@@ -100,7 +100,8 @@ route add -host 8.8.8.8 gw $VPNGW
 route add -host 8.8.4.4 gw $VPNGW
 route add -host 208.67.222.222 gw $VPNGW
 # www.dropbox.com
-route add -host 174.36.30.70 gw $VPNGW
+#route add -host 174.36.30.70 gw $VPNGW
+route add -net 174.36.30.0/24 gw $VPNGW
 # wiki.dropbox.com
 route add -host 174.36.51.41 gw $VPNGW
 # login.facebook.com
