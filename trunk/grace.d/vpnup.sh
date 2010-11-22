@@ -112,6 +112,9 @@ route add -net 72.14.192.0/18 gw $VPNGW
 route add -net 74.125.0.0/16 gw $VPNGW
 # static.cache.l.google.com in Taiwan
 route add -net 60.199.175.0/24 gw $VPNGW
+# webcache.googleusercontent.com
+route add -host 72.14.203.132 gw $VPNGW
+route add -host 78.16.49.15 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
@@ -163,6 +166,10 @@ route add -net 198.173.160.0/24 gw $VPNGW
 route add -net 198.173.161.0/24 gw $VPNGW
 # assets.vimeo.com
 route add -net 124.40.51.0/24 gw $VPNGW
+route add -net 198.87.176.0/24 gw $VPNGW
+route add -net 96.17.8.0/24 gw $VPNGW
+route add -net 204.2.171.0/24 gw $VPNGW
+route add -net 208.46.163.0/24 gw $VPNGW
 # *.vimeo.com
 route add -net 66.235.126.0/24 gw $VPNGW
 #route add -net 74.125.0.0/16 gw $VPNGW
