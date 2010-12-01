@@ -31,18 +31,25 @@ def getip(hostname=''):
 	r = dns.resolver.get_default_resolver()
 	r.nameservers=['8.8.8.8']
 	#answers = dns.resolver.query(hostname, 'A')
-	answers = r.query(hostname, 'A')
-	for rdata in answers:
-		print rdata.address
-		_ip.append(rdata.address)
+	try:
+		answers = r.query(hostname, 'A')
+		for rdata in answers:
+			print rdata.address
+			_ip.append(rdata.address)
+	except dns.resolver.NoAnswer:
+		print "no answer"
 
 	if hostname.find("www.") != 0:
 		hostname = "www."+hostname
 		print "querying "+hostname
-		answers = dns.resolver.query(hostname, 'A')
-		for rdata in answers:
-			print rdata.address
-			_ip.append(rdata.address)
+		try:
+			answers = dns.resolver.query(hostname, 'A')
+			for rdata in answers:
+				print rdata.address
+				_ip.append(rdata.address)
+		except dns.resolver.NoAnswer:
+			print "no answer"
+		
 	return list(set(_ip))
 
 for l in lines:
