@@ -8,10 +8,14 @@ import dns.resolver
 import re
 
 gfwlist = 'http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt'
+oklist = ['flickr.com']
 print "fetching gfwList ..."
 d = urllib.urlopen(gfwlist).read()
 #d = open('gfwlist.txt').read()
 data = base64.b64decode(d)
+#fd = open('gfwlist','w')
+#fd.write(data)
+#fd.close()
 lines = string.split(data, "\n")
 newlist = []
 
@@ -72,6 +76,8 @@ for l in lines:
 		if l.find("*") != -1:
 			continue
 		if l.find(".") == -1:
+			continue
+		if l in oklist:
 			continue
 		newlist.append(l)
 
