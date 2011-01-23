@@ -52,7 +52,8 @@ case $1 in
 				echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") router type: DD-WRT" >> $LOG
 				VPNSRV=$(nvram get pptpd_client_srvip)
 				VPNSRVSUB=$(nvram get pptpd_client_srvsub)
-				PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
+				#PPTPDEV=$(route -n | grep ^$VPNSRVSUB | awk '{print $NF}')
+				PPTPDEV=$(route -n | grep ^${VPNSRVSUB%.[0-9]*} | awk '{print $NF}' | head -n 1)
 				VPNGW=$(ifconfig $PPTPDEV | grep -Eo "P-t-P:([0-9.]+)" | cut -d: -f2)
 				;;
 		esac
