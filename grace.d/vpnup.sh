@@ -125,6 +125,8 @@ route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
 # fbcdn
 route add -net 96.17.8.0/24 gw $VPNGW
+# profile.ak.fbcdn
+route add -net 60.254.185.0/24 gw $VPNGW
 # imgN.imageshack.us
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
