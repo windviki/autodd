@@ -87,10 +87,10 @@ fi
 #echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") add default gw $VPNGW"  >> $LOG
 #route add default gw $VPNGW
 
-echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") loading vpnup_custom if available" >> $LOG
-export VPNGW=$VPNGW
-export OLDGW=$OLDGW
-grep ^route $VPNUPCUSTOM  | /bin/sh -x
+#echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") loading vpnup_custom if available" >> $LOG
+#export VPNGW=$VPNGW
+#export OLDGW=$OLDGW
+#grep ^route $VPNUPCUSTOM  | /bin/sh -x
 
 echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take a while." >> $LOG
 
@@ -1159,6 +1159,13 @@ route add -net 96.45.180.0/24 gw $VPNGW
 route add -net 97.74.144.0/24 gw $VPNGW
 route add -net 97.74.215.0/24 gw $VPNGW
 ##### end batch route #####
+
+
+echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") loading vpnup_custom if available" >> $LOG
+export VPNGW=$VPNGW
+export OLDGW=$OLDGW
+grep ^route $VPNUPCUSTOM  | /bin/sh -x
+
 
 
 # prepare for the exceptional routes, see http://code.google.com/p/autoddvpn/issues/detail?id=7
