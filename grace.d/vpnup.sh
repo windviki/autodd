@@ -99,6 +99,17 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take
 route add -host 8.8.8.8 gw $VPNGW
 route add -host 8.8.4.4 gw $VPNGW
 route add -host 208.67.222.222 gw $VPNGW
+# backchina.com
+# news.backchina.com
+route add -host 74.55.202.188 gw $VPNGW
+# club.backchina.com
+route add -host 174.120.186.208 gw $VPNGW
+# upload.backchina.com
+route add -host 74.55.213.83 gw $VPNGW
+# my.backchina.com
+route add -host 174.122.109.147 gw $VPNGW
+# backchina.pricegrabber.com
+route add -host 64.156.13.50 gw $VPNGW
 # www.dropbox.com
 #route add -host 174.36.30.70 gw $VPNGW
 route add -net 174.36.30.0/24 gw $VPNGW
