@@ -108,8 +108,10 @@ route add -host 174.120.186.208 gw $VPNGW
 route add -host 74.55.213.83 gw $VPNGW
 # my.backchina.com
 route add -host 174.122.109.147 gw $VPNGW
-# backchina.pricegrabber.com
-route add -host 64.156.13.50 gw $VPNGW
+# ym.backchina.com
+route add -host 174.133.3.65 gw $VPNGW
+# ads.backchina.com
+route add -host 74.55.49.45 gw $VPNGW
 # www.dropbox.com
 #route add -host 174.36.30.70 gw $VPNGW
 route add -net 174.36.30.0/24 gw $VPNGW
