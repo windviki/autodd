@@ -143,6 +143,7 @@ route add -net 60.254.185.0/24 gw $VPNGW
 # external.ak.fbcdn.net
 route add -net 60.254.175.0/24 gw $VPNGW
 route add -net 96.17.8.0/24 gw $VPNGW
+route add -net 96.17.15.0/24 gw $VPNGW
 # imgN.imageshack.us
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
