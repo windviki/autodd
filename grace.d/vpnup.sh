@@ -59,7 +59,8 @@ case $1 in
 		esac
 		;;
 	"openvpn")
-		VPNSRV=$(nvram get openvpncl_remoteip)
+		# we don't need $VPNSRV in graceMode
+		#VPNSRV=$(nvram get openvpncl_remoteip)
 		#OPENVPNSRVSUB=$(nvram get OPENVPNd_client_srvsub)
 		#OPENVPNDEV=$(route | grep ^$OPENVPNSRVSUB | awk '{print $NF}')
 		OPENVPNDEV='tun0'
