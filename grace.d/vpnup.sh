@@ -186,6 +186,8 @@ route add -net 60.199.252.0/24 gw $VPNGW
 # for all youtube
 route add -net 66.102.0.0/20 gw $VPNGW
 route add -net 72.14.213.0/24 gw $VPNGW
+# udn.com
+route add -host 210.243.0.0/16 gw $VPNGW
 # for vimeo
 # av.vimeo.com
 route add -net 117.104.138.0/24 gw $VPNGW
