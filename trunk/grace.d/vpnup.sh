@@ -113,6 +113,8 @@ route add -host 174.122.109.147 gw $VPNGW
 route add -host 174.133.3.65 gw $VPNGW
 # ads.backchina.com
 route add -host 74.55.49.45 gw $VPNGW
+# www.bbc.co.uk
+route add -net 212.58.246.0/24 gw $VPNGW
 # www.dropbox.com
 #route add -host 174.36.30.70 gw $VPNGW
 route add -net 174.36.30.0/24 gw $VPNGW
