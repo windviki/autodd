@@ -202,6 +202,8 @@ route add -net 117.104.138.0/24 gw $VPNGW
 route add -net 24.143.203.0/24 gw $VPNGW
 route add -net 198.173.160.0/24 gw $VPNGW
 route add -net 198.173.161.0/24 gw $VPNGW
+route add -net 140.174.24.0/24 gw $VPNGW
+route add -net 140.174.25.0/24 gw $VPNGW
 # assets.vimeo.com
 route add -net 124.40.51.0/24 gw $VPNGW
 route add -net 198.87.176.0/24 gw $VPNGW
@@ -210,10 +212,14 @@ route add -net 204.2.171.0/24 gw $VPNGW
 route add -net 208.46.163.0/24 gw $VPNGW
 # *.vimeo.com
 route add -net 66.235.126.0/24 gw $VPNGW
+# a.vimeocdn.com
+route add -net 63.235.28.0/24 gw $VPNGW
 #route add -net 74.125.0.0/16 gw $VPNGW
 route add -net 173.194.0.0/16 gw $VPNGW
 route add -net 208.117.224.0/19 gw $VPNGW
 route add -net 64.233.160.0/19 gw $VPNGW
+# t.vimeo.com
+route add -host 74.113.233.127 gw $VPNGW
 # embed.wretch.cc
 route add -net 203.188.204.0/24 gw $VPNGW
 # pic.wretch.cc
