@@ -115,6 +115,10 @@ route add -host 174.133.3.65 gw $VPNGW
 route add -host 74.55.49.45 gw $VPNGW
 # www.bbc.co.uk
 route add -net 212.58.246.0/24 gw $VPNGW
+# news.boxun.com
+route add -net 204.93.214.0/24 gw $VPNGW
+# news.chinatimes.com
+route add -net 122.147.51.0/24 gw $VPNGW
 # www.dropbox.com
 #route add -host 174.36.30.70 gw $VPNGW
 route add -net 174.36.30.0/24 gw $VPNGW
@@ -191,6 +195,7 @@ route add -net 60.199.252.0/24 gw $VPNGW
 #route add -net 74.125.6.0/24 gw $VPNGW
 #route add -net 74.125.15.0/24 gw $VPNGW
 #route add -net 74.125.19.0/24 gw $VPNGW
+route add -net 209.85.229.0/24 gw $VPNGW
 # for all youtube
 route add -net 66.102.0.0/20 gw $VPNGW
 route add -net 72.14.213.0/24 gw $VPNGW
