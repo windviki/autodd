@@ -3,6 +3,3 @@
 # route add -host 208.67.222.222 gw $VPNGW
 # route add -net 74.125.0.0/16 gw $VPNGW
 
-# www.skype.com
-route add -host 63.221.143.13 gw $VPNGW
-route add -host 204.9.163.162 gw $VPNGW
