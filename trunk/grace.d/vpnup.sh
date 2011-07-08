@@ -161,6 +161,9 @@ route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW                                                            
 route add -net 38.99.77.0/24 gw $VPNGW  
 route add -net 38.99.76.0/24 gw $VPNGW  
+
+# s.pixfs.net
+route add -net 115.69.195.0/24 gw $VPNGW
 # static.plurk.com
 route add -host 74.120.123.19 gw $VPNGW
 # statics.plurk.com
@@ -168,6 +171,8 @@ route add -net 216.137.53.0/24 gw $VPNGW
 route add -net 216.137.55.0/24 gw $VPNGW
 # images.plurk.com
 route add -net 216.137.53.0/24 gw $VPNGW
+# blog.sina.com.tw
+route add -net 210.17.38.0/24 gw $VPNGW
 #tumblr.com
 route add -host 174.120.238.130 gw $VPNGW
 # tw.nextmedia.com
