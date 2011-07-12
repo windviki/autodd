@@ -149,6 +149,7 @@ route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
 # fbcdn
 route add -net 96.17.8.0/24 gw $VPNGW
+route add -net 125.252.224.0/24 gw $VPNGW
 # profile.ak.fbcdn.net
 route add -net 60.254.185.0/24 gw $VPNGW
 route add -net 96.17.69.0/24 gw $VPNGW
@@ -158,10 +159,9 @@ route add -net 96.17.8.0/24 gw $VPNGW
 route add -net 96.17.15.0/24 gw $VPNGW
 # imgN.imageshack.us
 route add -net 208.75.252.0/24 gw $VPNGW
-route add -net 208.94.3.0/24 gw $VPNGW                                                            
+route add -net 208.94.3.0/24 gw $VPNGW
 route add -net 38.99.77.0/24 gw $VPNGW  
 route add -net 38.99.76.0/24 gw $VPNGW  
-
 # s.pixfs.net
 route add -net 115.69.195.0/24 gw $VPNGW
 # static.plurk.com
@@ -219,12 +219,15 @@ route add -net 209.85.147.0/24 gw $VPNGW
 route add -host 210.243.0.0/16 gw $VPNGW
 # for vimeo
 # av.vimeo.com
-route add -net 117.104.138.0/24 gw $VPNGW
-route add -net 24.143.203.0/24 gw $VPNGW
-route add -net 198.173.160.0/24 gw $VPNGW
-route add -net 198.173.161.0/24 gw $VPNGW
-route add -net 140.174.24.0/24 gw $VPNGW
-route add -net 140.174.25.0/24 gw $VPNGW
+#route add -net 117.104.138.0/24 gw $VPNGW
+#route add -net 24.143.203.0/24 gw $VPNGW
+#route add -net 198.173.160.0/24 gw $VPNGW
+#route add -net 198.173.161.0/24 gw $VPNGW
+#route add -net 140.174.24.0/24 gw $VPNGW
+#route add -net 140.174.25.0/24 gw $VPNGW
+route add -net 64.145.89.0/24 gw $VPNGW
+# player.vimeo.com
+route add -host 74.113.233.133 gw $VPNGW
 # assets.vimeo.com
 route add -net 124.40.51.0/24 gw $VPNGW
 route add -net 198.87.176.0/24 gw $VPNGW
@@ -235,6 +238,8 @@ route add -net 208.46.163.0/24 gw $VPNGW
 route add -net 66.235.126.0/24 gw $VPNGW
 # a.vimeocdn.com
 route add -net 63.235.28.0/24 gw $VPNGW
+route add -net 61.213.189.0/24 gw $VPNGW
+route add -net 60.254.175.0/24 gw $VPNGW
 #route add -net 74.125.0.0/16 gw $VPNGW
 route add -net 173.194.0.0/16 gw $VPNGW
 route add -net 208.117.224.0/19 gw $VPNGW
