@@ -147,6 +147,7 @@ route add -host 78.16.49.15 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
+route add -net 69.171.0.0/16 gw $VPNGW
 # fbcdn
 route add -net 96.17.8.0/24 gw $VPNGW
 route add -net 125.252.224.0/24 gw $VPNGW
@@ -157,6 +158,8 @@ route add -net 96.17.69.0/24 gw $VPNGW
 route add -net 60.254.175.0/24 gw $VPNGW
 route add -net 96.17.8.0/24 gw $VPNGW
 route add -net 96.17.15.0/24 gw $VPNGW
+# *.myweb.hinet.net
+route add -net 61.219.39.0/24 gw $VPNGW
 # imgN.imageshack.us
 route add -net 208.75.252.0/24 gw $VPNGW
 route add -net 208.94.3.0/24 gw $VPNGW
@@ -164,6 +167,8 @@ route add -net 38.99.77.0/24 gw $VPNGW
 route add -net 38.99.76.0/24 gw $VPNGW  
 # s.pixfs.net
 route add -net 115.69.195.0/24 gw $VPNGW
+route add -host 66.114.58.27 gw $VPNGW
+route add -net 175.41.3.0/24 gw $VPNGW
 # static.plurk.com
 route add -host 74.120.123.19 gw $VPNGW
 # statics.plurk.com
