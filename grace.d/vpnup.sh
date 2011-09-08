@@ -106,7 +106,7 @@ route add -host 50.23.162.108 gw $VPNGW
 # club.backchina.com
 route add -host 174.120.186.208 gw $VPNGW
 # upload.backchina.com
-route add -host 74.55.213.83 gw $VPNGW
+route add -host 74.208.17.78 gw $VPNGW
 # my.backchina.com
 route add -host 174.122.109.147 gw $VPNGW
 # ym.backchina.com
