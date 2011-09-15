@@ -176,6 +176,8 @@ route add -net 216.137.53.0/24 gw $VPNGW
 route add -net 216.137.55.0/24 gw $VPNGW
 # images.plurk.com
 route add -net 216.137.53.0/24 gw $VPNGW
+# ruten.com.tw
+route add -net 60.199.202.0/24 gw $VPNGW
 # blog.sina.com.tw
 route add -net 210.17.38.0/24 gw $VPNGW
 #tumblr.com
