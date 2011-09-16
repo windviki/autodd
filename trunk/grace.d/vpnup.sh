@@ -144,6 +144,8 @@ route add -net 60.199.175.0/24 gw $VPNGW
 # webcache.googleusercontent.com
 route add -host 72.14.203.132 gw $VPNGW
 route add -host 78.16.49.15 gw $VPNGW
+# googlevideo.com
+route add -net 159.106.121.0/24 gw $VPNGW
 # for all facebook
 route add -net 66.220.0.0/16 gw $VPNGW
 route add -net 69.63.0.0/16 gw $VPNGW
