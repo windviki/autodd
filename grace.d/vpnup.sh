@@ -202,6 +202,7 @@ route add -net 114.110.51.0/24 gw $VPNGW
 
 # tw.news.yahoo.com
 route add -net 203.84.204.0/24 gw $VPNGW
+route add -net 203.84.197.0/24 gw $VPNGW
 # beta.tw.news.yahoo.com
 route add -net 180.233.112.0/24 gw $VPNGW
 # tw.rd.yahoo.com
