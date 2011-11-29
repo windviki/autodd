@@ -139,6 +139,8 @@ route add -host 58.64.131.76 gw $VPNGW
 # for Google
 route add -net 72.14.192.0/18 gw $VPNGW
 route add -net 74.125.0.0/16 gw $VPNGW
+# Gmail
+route add -net 209.85.175.0/24 gw $VPNGW
 # static.cache.l.google.com in Taiwan
 route add -net 60.199.175.0/24 gw $VPNGW
 # webcache.googleusercontent.com
