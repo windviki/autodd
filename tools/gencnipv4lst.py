@@ -3,7 +3,8 @@
 import urllib
 import string
 
-ipv4url='http://ftp.apnic.net/apnic/dbase/data/country-ipv4.lst'
+#ipv4url='http://ftp.apnic.net/apnic/dbase/data/country-ipv4.lst'
+ipv4url='http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest'
 up="http://autoddvpn.googlecode.com/svn/trunk/vpnup.sh"
 down="http://autoddvpn.googlecode.com/svn/trunk/vpndown.sh"
 
