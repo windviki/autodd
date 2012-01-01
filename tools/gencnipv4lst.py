@@ -94,10 +94,10 @@ def main():
 	print "[INFO] generating the routes"
 	cnt=0
 	results = fetch_ip_data()
-	for ip,mask,_ in results:
+	for ip,mask,mask2 in results:
 		#print "route add -net %s netmask %s gw $OLDGW" % (ip, mask)
-		upfile.write("route add -net %s/%s gw $OLDGW\n" % (ip, mask))
-		downfile.write("route del -net %s/%s\n" % (ip, mask))
+		upfile.write("route add -net %s/%s gw $OLDGW\n" % (ip, mask2))
+		downfile.write("route del -net %s/%s\n" % (ip, mask2))
 		cnt+=1
 
 	print "[INFO] total %i routes generated(%i route(s) added)" % (cnt, cnt-oldcnt)
