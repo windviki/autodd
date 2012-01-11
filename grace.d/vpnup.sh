@@ -215,6 +215,8 @@ route add -net 180.233.112.0/24 gw $VPNGW
 route add -net 203.84.203.0/24 gw $VPNGW
 # tw.blog.yahoo
 route add -net 203.84.202.0/24 gw $VPNGW
+# tw.myblog.yahoo.com
+route add -net 119.160.242.0/24 gw $VPNGW
 # for all TW Yahoo
 route add -net 116.214.0.0/16 gw $VPNGW
 # us.lrd.yahoo.com
