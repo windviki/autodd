@@ -4,6 +4,7 @@ address=/twitter.com/199.59.148.82
 address=/www.twitter.com/199.59.148.82
 address=/api.twitter.com/199.59.148.87
 address=/encrypted.google.com/72.14.203.100
+address=/s.nexttv.com.tw/203.69.138.24
 server=/google.com/8.8.8.8
 server=/appspot.com/8.8.8.8
 server=/facebook.com/8.8.8.8
@@ -14,3 +15,4 @@ server=/ytimg.com/8.8.8.8
 server=/imageshack.us/8.8.8.8
 server=/books.com.tw/8.8.8.8
 server=/book.com.tw/8.8.8.8
+
