@@ -115,6 +115,8 @@ route add -host 174.133.3.65 gw $VPNGW
 route add -host 74.55.49.45 gw $VPNGW
 # www.bbc.co.uk
 route add -net 212.58.246.0/24 gw $VPNGW
+# api.bitly.com http://goo.gl/jZfTh
+route add -net 69.58.188.0/24 gw $VPNGW
 # news.boxun.com
 route add -net 204.93.214.0/24 gw $VPNGW
 # news.chinatimes.com
