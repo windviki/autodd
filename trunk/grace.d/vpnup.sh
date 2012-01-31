@@ -131,6 +131,8 @@ route add -net 75.101.159.0/24 gw $VPNGW
 route add -net 75.101.140.0/24 gw $VPNGW
 # wiki.dropbox.com
 route add -host 174.36.51.41 gw $VPNGW
+# www.feedly.com http://goo.gl/jZfTh
+route add -net 216.218.207.0/24 gw $VPNGW
 # login.facebook.com
 #route add -net 66.220.147.0/24 gw $VPNGW
 #route add -net 66.220.146.0/24 gw $VPNGW
