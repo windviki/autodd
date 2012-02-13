@@ -205,6 +205,8 @@ route add -net 168.143.171.0/24 gw $VPNGW
 route add -net 128.242.240.0/24 gw $VPNGW
 route add -net 128.242.245.0/24 gw $VPNGW
 route add -net 128.242.250.0/24 gw $VPNGW
+route add -net 199.59.148.0/24 gw $VPNGW
+route add -net 199.59.149.0/24 gw $VPNGW
 # t.co
 route add -net 199.59.148.0/24 gw $VPNGW
 # m.wikipedia.org
