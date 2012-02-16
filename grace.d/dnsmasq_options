@@ -6,6 +6,7 @@ address=/api.twitter.com/199.59.148.87
 address=/mobile.twitter.com/199.59.148.96
 address=/encrypted.google.com/72.14.203.100
 address=/s.nexttv.com.tw/203.69.138.24
+address=/av.vimeo.com/64.211.21.119
 server=/google.com/8.8.8.8
 server=/appspot.com/8.8.8.8
 server=/facebook.com/8.8.8.8

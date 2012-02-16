@@ -251,12 +251,7 @@ route add -net 209.85.147.0/24 gw $VPNGW
 route add -host 210.243.0.0/16 gw $VPNGW
 # for vimeo
 # av.vimeo.com
-#route add -net 117.104.138.0/24 gw $VPNGW
-#route add -net 24.143.203.0/24 gw $VPNGW
-#route add -net 198.173.160.0/24 gw $VPNGW
-#route add -net 198.173.161.0/24 gw $VPNGW
-#route add -net 140.174.24.0/24 gw $VPNGW
-#route add -net 140.174.25.0/24 gw $VPNGW
+route add -net 64.211.21.0/24 gw $VPNGW
 route add -net 64.145.89.0/24 gw $VPNGW
 # player.vimeo.com
 route add -host 74.113.233.133 gw $VPNGW
