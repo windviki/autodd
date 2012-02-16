@@ -275,6 +275,8 @@ route add -net 64.233.160.0/19 gw $VPNGW
 route add -host 74.113.233.127 gw $VPNGW
 # embed.wretch.cc
 route add -net 203.188.204.0/24 gw $VPNGW
+# f5.wretch.yimg.com
+route add -net 119.160.252.0/24 gw $VPNGW
 # pic.wretch.cc
 route add -host 116.214.13.248 gw $VPNGW
 route add -host 119.160.252.14 gw $VPNGW
