@@ -163,6 +163,8 @@ route add -net 69.171.0.0/16 gw $VPNGW
 # fbcdn
 route add -net 96.17.8.0/24 gw $VPNGW
 route add -net 125.252.224.0/24 gw $VPNGW
+# platform.ak.fbcdn.net
+route add -net 204.245.34.0/24 gw $VPNGW
 # profile.ak.fbcdn.net
 route add -net 60.254.185.0/24 gw $VPNGW
 route add -net 96.17.69.0/24 gw $VPNGW
