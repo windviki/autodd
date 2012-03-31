@@ -81,7 +81,9 @@ for l in lines:
 			continue
 		newlist.append(l)
 
-newlist.append('zh.wikipedia.org')
+known_list = [ x.rstrip() for x in open('known_gfw_domains').readlines() ]
+#newlist.append('zh.wikipedia.org')
+newlist.extend(known_list)
 newlist = list(set(newlist))
 newlist.sort()
 #print newlist

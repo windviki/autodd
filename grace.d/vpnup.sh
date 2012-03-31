@@ -135,7 +135,8 @@ route add -host 174.36.51.41 gw $VPNGW
 route add -net 216.218.207.0/24 gw $VPNGW
 # login.facebook.com
 #route add -net 66.220.147.0/24 gw $VPNGW
-#route add -net 66.220.146.0/24 gw $VPNGW
+route add -net 66.220.146.0/24 gw $VPNGW
+route add -net 66.220.149.0/24 gw $VPNGW
 # www.fotop.net
 route add -host 203.98.159.216 gw $VPNGW
 # t0.fotop.net
