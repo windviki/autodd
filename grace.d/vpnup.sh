@@ -100,19 +100,6 @@ echo "$INFO $(date "+%d/%b/%Y:%H:%M:%S") adding the static routes, this may take
 route add -host 8.8.8.8 gw $VPNGW
 route add -host 8.8.4.4 gw $VPNGW
 route add -host 208.67.222.222 gw $VPNGW
-# backchina.com
-# news.backchina.com
-route add -host 50.23.162.108 gw $VPNGW
-# club.backchina.com
-route add -host 174.120.186.208 gw $VPNGW
-# upload.backchina.com
-route add -host 74.208.17.78 gw $VPNGW
-# my.backchina.com
-route add -host 174.122.109.147 gw $VPNGW
-# ym.backchina.com
-route add -host 174.133.3.65 gw $VPNGW
-# ads.backchina.com
-route add -host 74.55.49.45 gw $VPNGW
 # www.bbc.co.uk
 route add -net 212.58.246.0/24 gw $VPNGW
 # api.bitly.com http://goo.gl/jZfTh
