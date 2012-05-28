@@ -200,6 +200,8 @@ route add -net 128.242.245.0/24 gw $VPNGW
 route add -net 128.242.250.0/24 gw $VPNGW
 route add -net 199.59.148.0/24 gw $VPNGW
 route add -net 199.59.149.0/24 gw $VPNGW
+# platform.twitter.com
+route add -host 23.59.181.55 gw $VPNGW
 # t.co
 route add -net 199.59.148.0/24 gw $VPNGW
 # m.wikipedia.org
